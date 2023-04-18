@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.myapp.R
-import datamodels.OrderHistoryItem
+import au.edu.swin.sdmd.myapp.datamodels.order.OrderHistoryItem
 
 class RecyclerOrderHistoryAdapter(var context: Context, private var orderHistoryList: ArrayList<OrderHistoryItem>) :
     RecyclerView.Adapter<RecyclerOrderHistoryAdapter.ItemListViewHolder>() {

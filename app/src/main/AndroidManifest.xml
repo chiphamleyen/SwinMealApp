@@ -33,7 +33,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".OrdersHistoryActivity"
+            android:name=".frontend.order.view.OrdersHistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -47,28 +47,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".OrderDoneActivity"
+            android:name=".frontend.order.view.OrderDoneActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PaymentActivity"
+            android:name=".frontend.order.view.PaymentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserMenuOrderActivity"
+            android:name=".frontend.order.view.UserMenuOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CurrentOrderActivity"
+            android:name=".frontend.order.view.CurrentOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

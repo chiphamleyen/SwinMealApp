@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.myapp
+package au.edu.swin.sdmd.myapp.frontend.order.view
 
 import adapters.RecyclerCurrentOrderAdapter
 import android.content.DialogInterface
@@ -12,8 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import datamodels.CurrentOrderItem
-import services.CurrentOrderRepository
+import au.edu.swin.sdmd.myapp.R
+import au.edu.swin.sdmd.myapp.datamodels.order.CurrentOrderItem
+import au.edu.swin.sdmd.myapp.frontend.order.control.CurrentOrderRepository
 
 class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.OnItemClickListener {
     private val currentOrderList = ArrayList<CurrentOrderItem>()

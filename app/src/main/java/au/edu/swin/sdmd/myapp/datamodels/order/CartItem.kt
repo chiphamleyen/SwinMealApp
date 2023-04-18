@@ -1,4 +1,4 @@
-package datamodels
+package au.edu.swin.sdmd.myapp.datamodels.order
 
 // Cart data model
 data class CartItem(

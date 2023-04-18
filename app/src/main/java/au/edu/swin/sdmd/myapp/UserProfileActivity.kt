@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import datamodels.OrderHistoryItem
-import services.User
 import services.UserDbHelper
 
 class UserProfileActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.myapp
+package au.edu.swin.sdmd.myapp.frontend.order.view
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
@@ -14,11 +14,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import datamodels.CurrentOrderItem
-import datamodels.OrderHistoryItem
-import services.CartRepository
-import services.CurrentOrderRepository
-import services.HistoryRepository
+import au.edu.swin.sdmd.myapp.MainActivity
+import au.edu.swin.sdmd.myapp.R
+import au.edu.swin.sdmd.myapp.datamodels.order.CurrentOrderItem
+import au.edu.swin.sdmd.myapp.datamodels.order.OrderHistoryItem
+import au.edu.swin.sdmd.myapp.frontend.order.control.CartRepository
+import au.edu.swin.sdmd.myapp.frontend.order.control.CurrentOrderRepository
+import au.edu.swin.sdmd.myapp.frontend.order.control.HistoryRepository
 import java.text.SimpleDateFormat
 import java.util.*
 

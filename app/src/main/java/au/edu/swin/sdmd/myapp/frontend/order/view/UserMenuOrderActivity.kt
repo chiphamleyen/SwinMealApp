@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.myapp
+package au.edu.swin.sdmd.myapp.frontend.order.view
 
 import adapters.RecyclerOrderItemAdapter
 import android.annotation.SuppressLint
@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import datamodels.CartItem
-import datamodels.MenuItem
-import services.CartRepository
+import au.edu.swin.sdmd.myapp.R
+import au.edu.swin.sdmd.myapp.datamodels.order.CartItem
+import au.edu.swin.sdmd.myapp.frontend.order.control.CartRepository
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*

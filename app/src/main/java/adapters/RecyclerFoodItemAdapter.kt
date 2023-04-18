@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import au.edu.swin.sdmd.myapp.R
-import datamodels.MenuItem
+import au.edu.swin.sdmd.myapp.datamodels.MenuItem
 import java.util.*
 import com.squareup.picasso.Picasso;
 

@@ -184,18 +184,42 @@
                                 <ImageView
                                     android:layout_width="@dimen/category_item_image_width"
                                     android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/noodles" />
+                                    android:src="@drawable/bbq" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="@string/noodles"
+                                    android:text="@string/bbq"
                                     android:textSize="12sp"
                                     android:fontFamily="@font/montserrat_semi_bold"/>
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/breads" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/breads"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -235,6 +259,31 @@
                                 <ImageView
                                     android:layout_width="@dimen/category_item_image_width"
                                     android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/chocolate" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/chocolates"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
                                     android:src="@drawable/pizza" />
 
                                 <TextView
@@ -248,55 +297,55 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="20dp"
-                                android:orientation="vertical"
-                                android:gravity="center_horizontal"
-                                android:onClick="showTagItems"
-                                android:clickable="true"
-                                android:focusable="true">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginEnd="20dp"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:gravity="center_horizontal"-->
+<!--                                android:onClick="showTagItems"-->
+<!--                                android:clickable="true"-->
+<!--                                android:focusable="true">-->
 
-                                <ImageView
-                                    android:layout_width="@dimen/category_item_image_width"
-                                    android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/salad" />
+<!--                                <ImageView-->
+<!--                                    android:layout_width="@dimen/category_item_image_width"-->
+<!--                                    android:layout_height="@dimen/category_item_image_height"-->
+<!--                                    android:src="@drawable/salad" />-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/salad"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_semi_bold"/>
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:text="@string/salad"-->
+<!--                                    android:textSize="12sp"-->
+<!--                                    android:fontFamily="@font/montserrat_semi_bold"/>-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="20dp"
-                                android:orientation="vertical"
-                                android:gravity="center_horizontal"
-                                android:onClick="showTagItems"
-                                android:clickable="true"
-                                android:focusable="true">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginEnd="20dp"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:gravity="center_horizontal"-->
+<!--                                android:onClick="showTagItems"-->
+<!--                                android:clickable="true"-->
+<!--                                android:focusable="true">-->
 
-                                <ImageView
-                                    android:layout_width="@dimen/category_item_image_width"
-                                    android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/soup" />
+<!--                                <ImageView-->
+<!--                                    android:layout_width="@dimen/category_item_image_width"-->
+<!--                                    android:layout_height="@dimen/category_item_image_height"-->
+<!--                                    android:src="@drawable/soup" />-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/soup"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_semi_bold"/>
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:text="@string/soup"-->
+<!--                                    android:textSize="12sp"-->
+<!--                                    android:fontFamily="@font/montserrat_semi_bold"/>-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -317,61 +366,61 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="@string/cake"
+                                    android:text="@string/desserts"
                                     android:textSize="12sp"
                                     android:fontFamily="@font/montserrat_semi_bold"/>
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="20dp"
-                                android:orientation="vertical"
-                                android:gravity="center_horizontal"
-                                android:onClick="showTagItems"
-                                android:clickable="true"
-                                android:focusable="true">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginEnd="20dp"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:gravity="center_horizontal"-->
+<!--                                android:onClick="showTagItems"-->
+<!--                                android:clickable="true"-->
+<!--                                android:focusable="true">-->
 
-                                <ImageView
-                                    android:layout_width="@dimen/category_item_image_width"
-                                    android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/snacks" />
+<!--                                <ImageView-->
+<!--                                    android:layout_width="@dimen/category_item_image_width"-->
+<!--                                    android:layout_height="@dimen/category_item_image_height"-->
+<!--                                    android:src="@drawable/snacks" />-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/snacks"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_semi_bold"/>
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:text="@string/snacks"-->
+<!--                                    android:textSize="12sp"-->
+<!--                                    android:fontFamily="@font/montserrat_semi_bold"/>-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="20dp"
-                                android:orientation="vertical"
-                                android:gravity="center_horizontal"
-                                android:onClick="showTagItems"
-                                android:clickable="true"
-                                android:focusable="true">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginEnd="20dp"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:gravity="center_horizontal"-->
+<!--                                android:onClick="showTagItems"-->
+<!--                                android:clickable="true"-->
+<!--                                android:focusable="true">-->
 
-                                <ImageView
-                                    android:layout_width="@dimen/category_item_image_width"
-                                    android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/fruit" />
+<!--                                <ImageView-->
+<!--                                    android:layout_width="@dimen/category_item_image_width"-->
+<!--                                    android:layout_height="@dimen/category_item_image_height"-->
+<!--                                    android:src="@drawable/fruit" />-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:text="@string/fruits"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_semi_bold"/>
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="5dp"-->
+<!--                                    android:text="@string/fruits"-->
+<!--                                    android:textSize="12sp"-->
+<!--                                    android:fontFamily="@font/montserrat_semi_bold"/>-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -392,7 +441,103 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="@string/cold_drink"
+                                    android:text="Drinks"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/steak" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/steaks"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/pork" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/porks"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/sandwich" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/sandwiches"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal"
+                                android:onClick="showTagItems"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <ImageView
+                                    android:layout_width="@dimen/category_item_image_width"
+                                    android:layout_height="@dimen/category_item_image_height"
+                                    android:src="@drawable/sausage" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/sausages"
                                     android:textSize="12sp"
                                     android:fontFamily="@font/montserrat_semi_bold"/>
                             </LinearLayout>
