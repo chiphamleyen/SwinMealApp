@@ -40,8 +40,8 @@ class FoodRepository(context: Context) {
                 // Select the release_version from the system.local table:
                 val rs = session.execute("select name from menu.menu where category = 'drinks'")
                 val row = rs.one()
-                val count = row?.getString("name")
-                println(count)
+                val foodName = row?.getString("name")
+                println(foodName)
             }
 //        val db = dbHelper.readableDatabase
 //        val projection = arrayOf(
