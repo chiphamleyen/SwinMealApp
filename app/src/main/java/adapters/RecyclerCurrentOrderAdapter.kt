@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.myapp.R
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import datamodels.CurrentOrderItem
+import au.edu.swin.sdmd.myapp.datamodels.order.CurrentOrderItem
 
 class RecyclerCurrentOrderAdapter(
     var context: Context,

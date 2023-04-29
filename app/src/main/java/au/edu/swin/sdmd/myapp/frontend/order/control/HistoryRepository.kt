@@ -1,10 +1,11 @@
-package services
+package au.edu.swin.sdmd.myapp.frontend.order.control
 
 import android.content.ContentValues
 import android.content.Context
 import android.widget.Toast
-import datamodels.CurrentOrderItem
-import datamodels.OrderHistoryItem
+import au.edu.swin.sdmd.myapp.datamodels.order.OrderHistoryItem
+import services.FoodDbHelper
+import services.HistoryContract
 
 class HistoryRepository(val context: Context) {
     private val dbHelper = FoodDbHelper(context)

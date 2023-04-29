@@ -1,8 +1,8 @@
-package datamodels
+package au.edu.swin.sdmd.myapp.datamodels
 
 // Menu data model
 data class MenuItem (
-    var itemID: Long,
+    var itemID: String,
     var imageUrl: String,
     var itemName: String,
     var itemPrice: Float,

@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.myapp
+package au.edu.swin.sdmd.myapp.frontend.order.view
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
+import au.edu.swin.sdmd.myapp.R
 
 class PaymentActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.myapp
+package au.edu.swin.sdmd.myapp.frontend.order.view
 
 import adapters.RecyclerOrderHistoryAdapter
 import android.annotation.SuppressLint
@@ -13,8 +13,9 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import datamodels.OrderHistoryItem
-import services.HistoryRepository
+import au.edu.swin.sdmd.myapp.R
+import au.edu.swin.sdmd.myapp.datamodels.order.OrderHistoryItem
+import au.edu.swin.sdmd.myapp.frontend.order.control.HistoryRepository
 
 class OrdersHistoryActivity : AppCompatActivity() {
     private var orderHistoryList = ArrayList<OrderHistoryItem>()

@@ -1,4 +1,4 @@
-package datamodels
+package au.edu.swin.sdmd.myapp.datamodels.order
 
 // Order History data model
 data class OrderHistoryItem(

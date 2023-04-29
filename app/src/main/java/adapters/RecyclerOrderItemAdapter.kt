@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.myapp.R
 import com.squareup.picasso.Picasso
-import datamodels.CartItem
+import au.edu.swin.sdmd.myapp.datamodels.order.CartItem
 
 class RecyclerOrderItemAdapter(var context: Context,
                                private val itemOrderedList: ArrayList<CartItem>,

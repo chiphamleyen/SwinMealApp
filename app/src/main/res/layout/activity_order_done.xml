@@ -6,7 +6,7 @@
     android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderDoneActivity">
+    tools:context=".frontend.order.view.OrderDoneActivity">
 
     <LinearLayout
         android:id="@+id/order_done_complete_ll"
