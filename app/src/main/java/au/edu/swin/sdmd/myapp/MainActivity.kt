@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.core.view.children
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
@@ -28,11 +29,14 @@ import au.edu.swin.sdmd.myapp.datamodels.MenuItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import au.edu.swin.sdmd.myapp.frontend.order.control.CartRepository
-import services.FoodRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import services.MenuItemServices
 
 class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
 
-    private lateinit var foodRepository: FoodRepository
+//    private lateinit var foodRepository: FoodRepository
+    private val menuItemServices = MenuItemServices()
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var adapter: RecyclerFoodItemAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -53,7 +57,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     private lateinit var slideshowCV: CardView
     private var searchIsActive = false
 
-    lateinit var foodList: List<MenuItem>
+    var foodList = listOf<MenuItem>()
     val imageList = ArrayList<SlideModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,13 +65,13 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         setContentView(R.layout.activity_main)
 
         // Initialize the food repository
-        foodRepository = FoodRepository(this)
+//        foodRepository = FoodRepository(this)
         // Initialize the cart repository
         cartRepository = CartRepository(this)
         // Clear cart table
         cartRepository.clearCartTable()
         // Clear food table
-        foodRepository.clearDatabase()
+//        foodRepository.clearDatabase()
 
         loadNavigationDrawer()
         loadMenu()
@@ -78,126 +82,126 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
         val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
         imageSlider.setImageList(imageList)
-
-
     }
 
     // Loading the menu
     private fun loadMenu() {
         // Add data
-        foodRepository.addFood(
-            MenuItem(
-            "ad",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2F1.jpg?alt=media&token=b250a0fc-195c-4d45-b8eb-00fb48255e4c",
-            "Beef Burger",
-            4.0F,
-            "Delicious taste, convenience, and versatility",
-            "Burger",
-            3.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "av",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fpop_3.png?alt=media&token=5c125f26-6646-4745-b1d7-2482323c7e73",
-            "Seafood Pizza",
-            4.5F,
-            "Delicious taste and wide range of flavors and textures",
-            "Pizza",
-            4.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "adda",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fcoca.jpg?alt=media&token=0fad8851-7585-4d13-8098-e50f7721dd46",
-            "Coca",
-            3.0F,
-            "Best with cold",
-            "Cold drinks",
-            3.5F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "acc",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fchocolatecake.jpg?alt=media&token=d5e8758d-21d4-467b-a35d-8c2b0dc979dd",
-            "Chocolate Cake",
-            5.2F,
-            "Indulgent flavor, moist and tender texture",
-            "Cake",
-            5.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "qwe",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fapple.jpg?alt=media&token=e6bd784c-4cba-41f6-a115-d7e9081dfbff",
-            "Apple",
-            3.5F,
-            "Fiber, vitamins, and antioxidants",
-            "Fruits",
-            4.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "ZCx",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fbutternutsoup.jpg?alt=media&token=7e51f242-f898-464f-8f19-fbf4fdf33a71",
-            "Butternut Soup",
-            4.8F,
-            "A smooth and velvety soup",
-            "Soup",
-            4.5F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "davac",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fpho.jpg?alt=media&token=e7ebcd17-bbc3-42fc-aff5-480e22bc3823",
-            "Pho bo",
-            4.0F,
-            "Beef broth, rice noodles, and thinly sliced beef",
-            "Noodles",
-            5.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "htr",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fsnack.jfif?alt=media&token=37ed71f1-499f-4b4a-9a02-bc636fd4582d",
-            "Lays Snack",
-            2.5F,
-            "Potato chips",
-            "Snacks",
-            3.0F)
-        )
-
-        foodRepository.addFood(
-            MenuItem(
-            "gdh",
-            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Ffishsalad.jpg?alt=media&token=cbdfacb7-763b-424b-8189-52cc0044f38a",
-            "Fish Salad",
-            3.8F,
-            "Refreshing and healthy",
-            "Salad",
-            4.0F)
-        )
+//        foodRepository.addFood(
+//            MenuItem(
+//            0,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2F1.jpg?alt=media&token=b250a0fc-195c-4d45-b8eb-00fb48255e4c",
+//            "Beef Burger",
+//            4.0F,
+//            "Delicious taste, convenience, and versatility",
+//            "Burger",
+//            3.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            1,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fpop_3.png?alt=media&token=5c125f26-6646-4745-b1d7-2482323c7e73",
+//            "Seafood Pizza",
+//            4.5F,
+//            "Delicious taste and wide range of flavors and textures",
+//            "Pizza",
+//            4.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            2,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fcoca.jpg?alt=media&token=0fad8851-7585-4d13-8098-e50f7721dd46",
+//            "Coca",
+//            3.0F,
+//            "Best with cold",
+//            "Cold drinks",
+//            3.5F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            3,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fchocolatecake.jpg?alt=media&token=d5e8758d-21d4-467b-a35d-8c2b0dc979dd",
+//            "Chocolate Cake",
+//            5.2F,
+//            "Indulgent flavor, moist and tender texture",
+//            "Cake",
+//            5.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            4,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fapple.jpg?alt=media&token=e6bd784c-4cba-41f6-a115-d7e9081dfbff",
+//            "Apple",
+//            3.5F,
+//            "Fiber, vitamins, and antioxidants",
+//            "Fruits",
+//            4.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            5,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fbutternutsoup.jpg?alt=media&token=7e51f242-f898-464f-8f19-fbf4fdf33a71",
+//            "Butternut Soup",
+//            4.8F,
+//            "A smooth and velvety soup",
+//            "Soup",
+//            4.5F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            6,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fpho.jpg?alt=media&token=e7ebcd17-bbc3-42fc-aff5-480e22bc3823",
+//            "Pho bo",
+//            4.0F,
+//            "Beef broth, rice noodles, and thinly sliced beef",
+//            "Noodles",
+//            5.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            7,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Fsnack.jfif?alt=media&token=37ed71f1-499f-4b4a-9a02-bc636fd4582d",
+//            "Lays Snack",
+//            2.5F,
+//            "Potato chips",
+//            "Snacks",
+//            3.0F)
+//        )
+//
+//        foodRepository.addFood(
+//            MenuItem(
+//            8,
+//            "https://firebasestorage.googleapis.com/v0/b/cafeteria-project-4ae2f.appspot.com/o/foodMenuItems%2Ffishsalad.jpg?alt=media&token=cbdfacb7-763b-424b-8189-52cc0044f38a",
+//            "Fish Salad",
+//            3.8F,
+//            "Refreshing and healthy",
+//            "Salad",
+//            4.0F)
+//        )
 
         // Display the list of food items
-        foodList = foodRepository.getAllFood()
-        Log.d("Menu", foodList.toString())
-
         //search function
-        loadSearchTask(foodList)
 
-        adapter = RecyclerFoodItemAdapter(foodList as MutableList<MenuItem>, this)
+        loadSearchTask(foodList)
+        lifecycleScope.launch {
+            foodList = withContext(Dispatchers.IO) { menuItemServices.getMenuItems() }
+            adapter = RecyclerFoodItemAdapter(foodList as MutableList<MenuItem>, this@MainActivity)
+            itemRecyclerView.adapter = adapter
+        }
+
         itemRecyclerView = findViewById(R.id.items_recycler_view)
 
         linearLayoutManager = LinearLayoutManager(this)
         itemRecyclerView.layoutManager = linearLayoutManager
 
-        itemRecyclerView.adapter = adapter
+
 
         GlobalScope.launch {
             //show all switching function
@@ -217,62 +221,62 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
     //plus button handler
     override fun onPlusBtnClick(item: MenuItem) {
-        GlobalScope.launch  {
-            item.quantity += 1
-            val cartItem = CartItem(
-                itemID = item.itemID,
-                itemName = item.itemName,
-                imageUrl = item.imageUrl,
-                itemPrice = item.itemPrice,
-                quantity = item.quantity,
-                itemStars = item.itemStars,
-                itemShortDesc = item.itemShortDesc,
-                foodID = item.itemID
-            )
-            cartRepository.increaseCartItemQuantity(
-                cartItem.itemID,
-                cartItem.itemName,
-                cartItem.itemPrice,
-                cartItem.itemShortDesc,
-                cartItem.imageUrl,
-                cartItem.itemStars,
-                cartItem.quantity,
-                item.itemID
-            )
-
-            Log.i("quantity: ", item.quantity.toString())
-            Log.i("cart: ", cartItem.toString())
-        }
+//        GlobalScope.launch  {
+//            item.quantity += 1
+//            val cartItem = CartItem(
+//                itemID = item.itemID,
+//                itemName = item.itemName,
+//                imageUrl = item.imageUrl,
+//                itemPrice = item.itemPrice,
+//                quantity = item.quantity,
+//                itemStars = item.itemStars,
+//                itemShortDesc = item.itemShortDesc,
+//                foodID = item.itemID
+//            )
+//            cartRepository.increaseCartItemQuantity(
+//                cartItem.itemID,
+//                cartItem.itemName,
+//                cartItem.itemPrice,
+//                cartItem.itemShortDesc,
+//                cartItem.imageUrl,
+//                cartItem.itemStars,
+//                cartItem.quantity,
+//                item.itemID
+//            )
+//
+//            Log.i("quantity: ", item.quantity.toString())
+//            Log.i("cart: ", cartItem.toString())
+//        }
     }
 
     //minus button handler
     override fun onMinusBtnClick(item: MenuItem) {
-        GlobalScope.launch {
-            if (item.quantity > 0) {
-                item.quantity -= 1
-                val cartItem = CartItem(
-                    itemID = item.itemID,
-                    itemName = item.itemName,
-                    imageUrl = item.imageUrl,
-                    itemPrice = item.itemPrice,
-                    quantity = item.quantity,
-                    itemStars = item.itemStars,
-                    itemShortDesc = item.itemShortDesc,
-                    foodID = item.itemID
-                )
-
-                if (item.quantity == 0) {
-                    // If quantity becomes 0, remove the item from cart
-                    cartRepository.removeFromCart(cartItem)
-
-                } else {
-                    // Update the cart item quantity
-                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity, item.itemID)
-                }
-                Log.i("quantity: ", item.quantity.toString())
-                Log.i("cart: ", cartItem.toString())
-            }
-        }
+//        GlobalScope.launch {
+//            if (item.quantity > 0) {
+//                item.quantity -= 1
+//                val cartItem = CartItem(
+//                    itemID = item.itemID,
+//                    itemName = item.itemName,
+//                    imageUrl = item.imageUrl,
+//                    itemPrice = item.itemPrice,
+//                    quantity = item.quantity,
+//                    itemStars = item.itemStars,
+//                    itemShortDesc = item.itemShortDesc,
+//                    foodID = item.itemID
+//                )
+//
+//                if (item.quantity == 0) {
+//                    // If quantity becomes 0, remove the item from cart
+//                    cartRepository.removeFromCart(cartItem)
+//
+//                } else {
+//                    // Update the cart item quantity
+//                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity, item.itemID)
+//                }
+//                Log.i("quantity: ", item.quantity.toString())
+//                Log.i("cart: ", cartItem.toString())
+//            }
+//        }
     }
 
     //displays the items which are of same category

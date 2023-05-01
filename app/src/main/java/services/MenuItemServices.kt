@@ -1,0 +1,33 @@
+package services
+
+import au.edu.swin.sdmd.myapp.datamodels.MenuItem
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
+
+class MenuItemServices {
+    private val httpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .build()
+
+    fun getMenuItems(): List<MenuItem> {
+        val request = Request.Builder()
+            .url("http://10.0.2.2:8080/menu/all")
+            .build()
+
+        val response = httpClient.newCall(request).execute()
+        println(response)
+        if (!response.isSuccessful) {
+            throw RuntimeException("Failed to get menu items")
+        }
+
+        val responseBody = response.body?.string()
+
+        return jacksonObjectMapper().readValue(responseBody ?: "", object : TypeReference<List<MenuItem>>() {})
+    }
+
+}
