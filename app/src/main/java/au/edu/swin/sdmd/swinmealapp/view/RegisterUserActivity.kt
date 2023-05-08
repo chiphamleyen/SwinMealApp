@@ -60,37 +60,42 @@ class RegisterUserActivity : AppCompatActivity() {
         val name = fullNameTIL.text.toString()
 
         val customer = Customer(UUID(12,1), email, password, name, null, null,null,null,null,null)
-
-        if (password == cfpassword) {
-            menuItemServices.registerUser(customer) { response, errorMessage ->
-                if (response.isSuccessful) {
-                    // Registration successful
-                    runOnUiThread {
-                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                        val loginIntent = Intent(this, LoginUserActivity::class.java)
-                        startActivity(loginIntent)
-                        finish()
-                    }
-                } else {
-                    // Registration failed
-                    runOnUiThread {
-                        if (errorMessage != null) {
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Failed to register user", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || cfpassword.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
         }
 
         else {
-            // Password and confirm password do not match
-            Toast.makeText(
-                this,
-                "Password and Confirm Password do not match",
-                Toast.LENGTH_SHORT
-            ).show()
+            if (password == cfpassword) {
+                menuItemServices.registerUser(customer) { response, errorMessage ->
+                    if (response.isSuccessful) {
+                        // Registration successful
+                        runOnUiThread {
+                            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT)
+                                .show()
+                            val loginIntent = Intent(this, LoginUserActivity::class.java)
+                            startActivity(loginIntent)
+                            finish()
+                        }
+                    } else {
+                        // Registration failed
+                        runOnUiThread {
+                            if (errorMessage != null) {
+                                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this, "Failed to register user", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    }
+                }
+            } else {
+                // Password and confirm password do not match
+                Toast.makeText(
+                    this,
+                    "Password and Confirm Password do not match",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
 //        val databaseHelper = UserDbHelper(this)
