@@ -85,9 +85,9 @@ class RegisterUserActivity : AppCompatActivity() {
 //                // Registration successful
 //                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
 //                // Redirect to login activity
-//                val loginIntent = Intent(this, LoginUserActivity::class.java)
-//                startActivity(loginIntent)
-//                finish()
+                val loginIntent = Intent(this, LoginUserActivity::class.java)
+                startActivity(loginIntent)
+                finish()
 //                Log.i("user", name + email)
 //
 //            } else {
