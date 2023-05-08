@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
             ll.alpha = 0.5f
         }
         (view as LinearLayout).alpha = 1.0f
-        val tag = ((view as LinearLayout).getChildAt(1) as TextView).text.toString()
+        val tag = ((view as LinearLayout).getChildAt(1) as TextView).text.toString().lowercase()
         val filterList = ArrayList<MenuItem>()
         for (item in foodList) {
             if (item.itemTag == tag) filterList.add(item)

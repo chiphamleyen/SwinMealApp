@@ -34,7 +34,7 @@ class FoodRepository(context: Context) {
     // read all food items in the menu table
     fun getAllFood(): List<MenuItem> {
         CqlSession.builder()
-            .withCloudSecureConnectBundle(Paths.get("C:/Users/htktl/Downloads/secure-connect-swinmealapp.zip"))
+            .withCloudSecureConnectBundle(Paths.get("D:/IT/Akathon/New folder/secure-connect-swinmealapp.zip"))
             .withAuthCredentials("AcRCBgaqoLkRzpruuQKQWpdS", "lXLR2SszZgnO4JiF,,ugKfELqmXwP74jR4_-Qq-T,f9P4OKRnoWeB0zOos,T0qg0+85KcW3MUdmZY1Zj3sC4x3dSTZZM8vXz0Ki08J_R4MHfQS9rGHR8twLI7NWfql2Q")
             .build().use { session ->
                 // Select the release_version from the system.local table:

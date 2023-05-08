@@ -26,15 +26,26 @@
             android:onClick="goBack"/>
 
         <TextView
+            android:id="@+id/textProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/full_details"
-            android:textSize="18sp"
-            android:textColor="@color/white"
             android:fontFamily="@font/montserrat_semi_bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/full_details"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="100dp"
+            android:onClick="updateProfile"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textProfile"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,7 +62,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,90 +72,90 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_user_icon"
-                    android:transitionName="userIconTransition"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/white"
+                    android:elevation="10dp"
                     android:src="@drawable/user_male"
-                    android:elevation="10dp" />
+                    android:transitionName="userIconTransition"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp" />
 
                 <TextView
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/name"
-                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:textColor="@color/purple_theme_color"/>
+                    android:text="@string/name"
+                    android:textColor="@color/purple_theme_color"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/profile_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:text="@string/e_mail"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_light_color"/>
+                    android:textColor="@color/text_light_color"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:paddingBottom="100dp"
-                    android:paddingHorizontal="20dp"
+                    android:clipToPadding="false"
                     android:orientation="vertical"
-                    android:clipToPadding="false">
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="100dp">
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginVertical="@dimen/profile_card_margin_vertical"-->
-<!--                        app:cardCornerRadius="5dp"-->
-<!--                        app:cardElevation="@dimen/profile_card_elevation"-->
-<!--                        app:cardPreventCornerOverlap="false">-->
+                    <!--                    <androidx.cardview.widget.CardView-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginVertical="@dimen/profile_card_margin_vertical"-->
+                    <!--                        app:cardCornerRadius="5dp"-->
+                    <!--                        app:cardElevation="@dimen/profile_card_elevation"-->
+                    <!--                        app:cardPreventCornerOverlap="false">-->
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"-->
-<!--                            android:layout_marginHorizontal="15dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:gravity="center_vertical">-->
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"-->
+                    <!--                            android:layout_marginHorizontal="15dp"-->
+                    <!--                            android:orientation="horizontal"-->
+                    <!--                            android:gravity="center_vertical">-->
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="30dp"-->
-<!--                                android:layout_marginEnd="10dp"-->
-<!--                                android:src="@drawable/ic_reg_id"-->
-<!--                                android:contentDescription="@string/cafy_reg_id"/>-->
+                    <!--                            <ImageView-->
+                    <!--                                android:layout_width="30dp"-->
+                    <!--                                android:layout_height="30dp"-->
+                    <!--                                android:layout_marginEnd="10dp"-->
+                    <!--                                android:src="@drawable/ic_reg_id"-->
+                    <!--                                android:contentDescription="@string/cafy_reg_id"/>-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="vertical">-->
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="@string/cafy_reg_id"-->
-<!--                                    android:fontFamily="@font/montserrat_bold"-->
-<!--                                    android:textSize="12sp"-->
-<!--                                    android:textColor="@color/purple_theme_color"/>-->
-<!--                                <TextView-->
-<!--                                    android:id="@+id/profile_reg_id_tv"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="@string/cafy_reg_id"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textColor="@color/text_light_color"/>-->
-<!--                            </LinearLayout>-->
+                    <!--                            <LinearLayout-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:orientation="vertical">-->
+                    <!--                                <TextView-->
+                    <!--                                    android:layout_width="wrap_content"-->
+                    <!--                                    android:layout_height="wrap_content"-->
+                    <!--                                    android:text="@string/cafy_reg_id"-->
+                    <!--                                    android:fontFamily="@font/montserrat_bold"-->
+                    <!--                                    android:textSize="12sp"-->
+                    <!--                                    android:textColor="@color/purple_theme_color"/>-->
+                    <!--                                <TextView-->
+                    <!--                                    android:id="@+id/profile_reg_id_tv"-->
+                    <!--                                    android:layout_width="wrap_content"-->
+                    <!--                                    android:layout_height="wrap_content"-->
+                    <!--                                    android:text="@string/cafy_reg_id"-->
+                    <!--                                    android:textSize="15sp"-->
+                    <!--                                    android:textColor="@color/text_light_color"/>-->
+                    <!--                            </LinearLayout>-->
 
-<!--                        </LinearLayout>-->
+                    <!--                        </LinearLayout>-->
 
-<!--                    </androidx.cardview.widget.CardView>-->
+                    <!--                    </androidx.cardview.widget.CardView>-->
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -156,36 +168,38 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
                             android:layout_marginHorizontal="15dp"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
-                                android:src="@drawable/ic_employee_id"
-                                android:contentDescription="@string/employee_id"/>
+                                android:contentDescription="@string/employee_id"
+                                android:src="@drawable/ic_employee_id" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/employee_id"
                                     android:fontFamily="@font/montserrat_bold"
-                                    android:textSize="12sp"
-                                    android:textColor="@color/purple_theme_color"/>
+                                    android:text="@string/employee_id"
+                                    android:textColor="@color/purple_theme_color"
+                                    android:textSize="12sp" />
+
                                 <TextView
                                     android:id="@+id/profile_employeeid"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/employee_id"
-                                    android:textSize="15sp"
-                                    android:textColor="@color/text_light_color"/>
+                                    android:textColor="@color/text_light_color"
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -203,88 +217,90 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
                             android:layout_marginHorizontal="15dp"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
-                                android:src="@drawable/ic_mobile"
-                                android:contentDescription="@string/mobile_number"/>
+                                android:contentDescription="@string/mobile_number"
+                                android:src="@drawable/ic_mobile" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/mobile_number"
                                     android:fontFamily="@font/montserrat_bold"
-                                    android:textSize="12sp"
-                                    android:textColor="@color/purple_theme_color"/>
+                                    android:text="@string/mobile_number"
+                                    android:textColor="@color/purple_theme_color"
+                                    android:textSize="12sp" />
+
                                 <TextView
                                     android:id="@+id/profile_mobile"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/mobile_number"
-                                    android:textSize="15sp"
-                                    android:textColor="@color/text_light_color"/>
+                                    android:textColor="@color/text_light_color"
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginVertical="@dimen/profile_card_margin_vertical"-->
-<!--                        app:cardCornerRadius="5dp"-->
-<!--                        app:cardElevation="@dimen/profile_card_elevation"-->
-<!--                        app:cardPreventCornerOverlap="false">-->
+                    <!--                    <androidx.cardview.widget.CardView-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginVertical="@dimen/profile_card_margin_vertical"-->
+                    <!--                        app:cardCornerRadius="5dp"-->
+                    <!--                        app:cardElevation="@dimen/profile_card_elevation"-->
+                    <!--                        app:cardPreventCornerOverlap="false">-->
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"-->
-<!--                            android:layout_marginHorizontal="15dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:gravity="center_vertical">-->
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"-->
+                    <!--                            android:layout_marginHorizontal="15dp"-->
+                    <!--                            android:orientation="horizontal"-->
+                    <!--                            android:gravity="center_vertical">-->
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="30dp"-->
-<!--                                android:layout_marginEnd="10dp"-->
-<!--                                android:src="@drawable/ic_daily_order"-->
-<!--                                android:contentDescription="@string/reg_date"/>-->
+                    <!--                            <ImageView-->
+                    <!--                                android:layout_width="30dp"-->
+                    <!--                                android:layout_height="30dp"-->
+                    <!--                                android:layout_marginEnd="10dp"-->
+                    <!--                                android:src="@drawable/ic_daily_order"-->
+                    <!--                                android:contentDescription="@string/reg_date"/>-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="vertical">-->
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="@string/reg_date"-->
-<!--                                    android:fontFamily="@font/montserrat_bold"-->
-<!--                                    android:textSize="12sp"-->
-<!--                                    android:textColor="@color/purple_theme_color"/>-->
-<!--                                <TextView-->
-<!--                                    android:id="@+id/profile_reg_date_tv"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:text="@string/reg_date"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textColor="@color/text_light_color"/>-->
-<!--                            </LinearLayout>-->
+                    <!--                            <LinearLayout-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:orientation="vertical">-->
+                    <!--                                <TextView-->
+                    <!--                                    android:layout_width="wrap_content"-->
+                    <!--                                    android:layout_height="wrap_content"-->
+                    <!--                                    android:text="@string/reg_date"-->
+                    <!--                                    android:fontFamily="@font/montserrat_bold"-->
+                    <!--                                    android:textSize="12sp"-->
+                    <!--                                    android:textColor="@color/purple_theme_color"/>-->
+                    <!--                                <TextView-->
+                    <!--                                    android:id="@+id/profile_reg_date_tv"-->
+                    <!--                                    android:layout_width="wrap_content"-->
+                    <!--                                    android:layout_height="wrap_content"-->
+                    <!--                                    android:text="@string/reg_date"-->
+                    <!--                                    android:textSize="15sp"-->
+                    <!--                                    android:textColor="@color/text_light_color"/>-->
+                    <!--                            </LinearLayout>-->
 
-<!--                        </LinearLayout>-->
+                    <!--                        </LinearLayout>-->
 
-<!--                    </androidx.cardview.widget.CardView>-->
+                    <!--                    </androidx.cardview.widget.CardView>-->
 
                 </LinearLayout>
 

@@ -5,7 +5,7 @@
     <string name="food_categories">Food Categories</string>
     <string name="fruits">Fruits</string>
     <string name="cake">Cake</string>
-    <string name="pizza">Pizza</string>
+    <string name="pizza">Pizzas</string>
     <string name="soup">Soup</string>
     <string name="snacks">Snacks</string>
     <string name="cookies">Cookies</string>
@@ -140,7 +140,7 @@
     <string name="default_card_number">2334 xxxx xxxx 6335</string>
     <string name="default_date">09/23</string>
     <string name="hello">Hello!</string>
-    <string name="bbq">BBQ</string>
+    <string name="bbq">BBQs</string>
     <string name="breads">Breads</string>
     <string name="chocolates">Chocolates</string>
     <string name="desserts">Desserts</string>

@@ -44,13 +44,13 @@ class UserDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     // User registration
-    fun registerUser(name: String, email: String, employeeId: String, mobile: String, password: String) {
+    fun registerUser(name: String, email: String, password: String) {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COLUMN_USER_NAME, name)
         values.put(COLUMN_USER_EMAIL, email)
-        values.put(COLUMN_USER_EMPLOYEEID, employeeId)
-        values.put(COLUMN_USER_MOBILE, mobile)
+//        values.put(COLUMN_USER_EMPLOYEEID, employeeId)
+//        values.put(COLUMN_USER_MOBILE, mobile)
         values.put(COLUMN_USER_PASSWORD, password)
         db.insert(TABLE_USERS, null, values)
 

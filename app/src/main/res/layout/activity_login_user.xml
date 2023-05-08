@@ -107,8 +107,8 @@
             android:text="@string/register"
             android:textSize="15sp"
             android:textColor="@color/purple_theme_color"
-            android:fontFamily="@font/montserrat_bold"/>
-<!--            android:onClick="openRegisterActivity"-->
+            android:fontFamily="@font/montserrat_bold"
+            android:onClick="openRegisterActivity"/>
     </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

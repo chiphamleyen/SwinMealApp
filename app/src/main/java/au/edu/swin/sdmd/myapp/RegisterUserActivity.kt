@@ -11,9 +11,12 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import au.edu.swin.sdmd.myapp.datamodels.Customer
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import services.MenuItemServices
 import services.UserDbHelper
+import java.util.*
 
 class RegisterUserActivity : AppCompatActivity() {
 
@@ -27,6 +30,8 @@ class RegisterUserActivity : AppCompatActivity() {
     private lateinit var agreeCheckBox: CheckBox
     private lateinit var registerBtn: Button
 
+    private val menuItemServices = MenuItemServices()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +39,8 @@ class RegisterUserActivity : AppCompatActivity() {
 
         fullNameTIL = findViewById(R.id.fullname)
         emailTIL = findViewById(R.id.email)
-        employeeIDTIL = findViewById(R.id.employeeId)
-        mobileNumberTIL = findViewById(R.id.mobile)
+//        employeeIDTIL = findViewById(R.id.employeeId)
+//        mobileNumberTIL = findViewById(R.id.mobile)
         createPasswordTIL = findViewById(R.id.password)
         confirmPasswordTIL = findViewById(R.id.cfpassword)
 
@@ -47,50 +52,53 @@ class RegisterUserActivity : AppCompatActivity() {
         }
 
         registerBtn.setOnClickListener {
-            val email = emailTIL.text.toString()
-            val password = createPasswordTIL.text.toString()
-            val cfpassword = confirmPasswordTIL.text.toString()
-            val name = fullNameTIL.text.toString()
-            val employeeId = employeeIDTIL.text.toString()
-            val mobile = mobileNumberTIL.text.toString()
+//            val email = emailTIL.text.toString()
+//            val password = createPasswordTIL.text.toString()
+//            val cfpassword = confirmPasswordTIL.text.toString()
+//            val name = fullNameTIL.text.toString()
+//            val employeeId = employeeIDTIL.text.toString()
+//            val mobile = mobileNumberTIL.text.toString()
 
-            registerUser(
-                name,
-                email,
-                employeeId,
-                mobile,
-                password,
-                cfpassword
-            )
+            registerUser()
         }
     }
 
     //validation
-    private fun registerUser(name: String, email: String, employeeId: String, mobile: String, password: String, confirmPassword: String) {
-        val databaseHelper = UserDbHelper(this)
-        if (name.isEmpty() || email.isEmpty() || employeeId.isEmpty() || mobile.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-        } else {
-            if (password == confirmPassword) {
-                databaseHelper.registerUser(name, email, employeeId, mobile, password)
+    private fun registerUser() {
+        val email = emailTIL.text.toString()
+        val password = createPasswordTIL.text.toString()
+        val cfpassword = confirmPasswordTIL.text.toString()
+        val name = fullNameTIL.text.toString()
 
-                // Registration successful
-                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                // Redirect to login activity
-                val loginIntent = Intent(this, LoginUserActivity::class.java)
-                startActivity(loginIntent)
-                finish()
-                Log.i("user", name + email)
+        val customer = Customer(UUID(12,1), email, password, name, null, null,null,null,null,null)
 
-            } else {
-                // Password and confirm password do not match
-                Toast.makeText(
-                    this,
-                    "Password and Confirm Password do not match",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        if (password == cfpassword) {
+            menuItemServices.registerUser(customer)
         }
+//        val databaseHelper = UserDbHelper(this)
+//        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+//            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+//        } else {
+//            if (password == confirmPassword) {
+//                databaseHelper.registerUser(name, email, password)
+//
+//                // Registration successful
+//                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+//                // Redirect to login activity
+//                val loginIntent = Intent(this, LoginUserActivity::class.java)
+//                startActivity(loginIntent)
+//                finish()
+//                Log.i("user", name + email)
+//
+//            } else {
+//                // Password and confirm password do not match
+//                Toast.makeText(
+//                    this,
+//                    "Password and Confirm Password do not match",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
     }
 
     //login text

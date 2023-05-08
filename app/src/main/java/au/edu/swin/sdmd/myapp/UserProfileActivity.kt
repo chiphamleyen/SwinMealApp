@@ -47,4 +47,6 @@ class UserProfileActivity : AppCompatActivity() {
 
     fun goBack(view: View) {onBackPressed()}
 
+    fun updateProfile(view: View) {}
+
 }
