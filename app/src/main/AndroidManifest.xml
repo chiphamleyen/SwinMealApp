@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="au.edu.swin.sdmd.myapp">
+    package="au.edu.swin.sdmd.swinmealapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,70 +14,70 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".UserProfileActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.UserProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginUserActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.LoginUserActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterUserActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.RegisterUserActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.order.view.OrdersHistoryActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.OrdersHistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.order.view.OrderDoneActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.OrderDoneActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.order.view.PaymentActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.PaymentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.order.view.UserMenuOrderActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.UserMenuOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.order.view.CurrentOrderActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.CurrentOrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="au.edu.swin.sdmd.swinmealapp.view.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
