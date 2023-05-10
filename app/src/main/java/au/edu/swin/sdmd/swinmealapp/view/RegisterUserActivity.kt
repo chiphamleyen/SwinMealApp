@@ -11,7 +11,7 @@ import android.widget.Toast
 import au.edu.swin.sdmd.swinmealapp.R
 import au.edu.swin.sdmd.swinmealapp.datamodels.Customer
 import com.google.android.material.textfield.TextInputEditText
-import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
+import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 import java.util.*
 
 class RegisterUserActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class RegisterUserActivity : AppCompatActivity() {
     private lateinit var agreeCheckBox: CheckBox
     private lateinit var registerBtn: Button
 
-    private val menuItemServices = MenuItemServices()
+    private val menuItemServices = CustomerServices()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +59,7 @@ class RegisterUserActivity : AppCompatActivity() {
         val cfpassword = confirmPasswordTIL.text.toString()
         val name = fullNameTIL.text.toString()
 
-        val customer = Customer(UUID(12,1), email, password, name, null, null,null,null,null,null)
+        val customer = Customer(UUID(12,1), email, password, name, null, null,null,null,null)
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || cfpassword.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
         }

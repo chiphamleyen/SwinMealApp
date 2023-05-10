@@ -1,6 +1,7 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,15 +10,14 @@ import android.widget.Button
 import android.widget.Toast
 import au.edu.swin.sdmd.swinmealapp.R
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.runBlocking
-import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
+import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 
 class LoginUserActivity : AppCompatActivity() {
 
     private lateinit var emailTIL: TextInputEditText
     private lateinit var passwordTIL: TextInputEditText
     private lateinit var btnLogin: Button
-    private val menuItemServices = MenuItemServices()
+    private val menuItemServices = CustomerServices()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +49,13 @@ class LoginUserActivity : AppCompatActivity() {
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                         val loginIntent = Intent(this, MainActivity::class.java)
                         startActivity(loginIntent)
+
+                        // Save email data to SharedPreferences
+                        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        val editor = sharedPrefs.edit()
+                        editor.putString("email", email)
+                        editor.apply()
+
                         finish()
                     }
                 } else {

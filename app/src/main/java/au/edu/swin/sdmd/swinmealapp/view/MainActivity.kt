@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CartRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
 
 class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
