@@ -34,13 +34,11 @@ class UserProfileSettings : AppCompatActivity() {
         actLevelTIL = findViewById(R.id.actLevel)
         saveBtn = findViewById(R.id.saveBtn)
 
-//        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//        val userEmail = sharedPrefs.getString("email", "") ?: ""
-//        Log.i("intent", userEmail.toString())
+        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("email", "") ?: ""
+        Log.i("profile update email", userEmail.toString())
 
-        val userEmail = "chipham@gmail.com"
-
-//        val fullname = fullNameTIL.text.toString()
+//        val userEmail = "chipham@gmail.com"
 
         saveBtn.setOnClickListener {
             val gender = genderTIL.text.toString()
