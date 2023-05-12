@@ -17,7 +17,7 @@ class LoginUserActivity : AppCompatActivity() {
     private lateinit var emailTIL: TextInputEditText
     private lateinit var passwordTIL: TextInputEditText
     private lateinit var btnLogin: Button
-    private val menuItemServices = CustomerServices()
+    private val customerServices = CustomerServices()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +38,10 @@ class LoginUserActivity : AppCompatActivity() {
 
     //validation and start intent. share preferences
     private fun userLogin(email: String, password: String) {
-//        val databaseHelper = UserDbHelper(this)
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
         } else {
-            menuItemServices.customerLogin(email, password) { response, errorMessage ->
+            customerServices.customerLogin(email, password) { response, errorMessage ->
                 if (response.isSuccessful) {
                     // Registration successful
                     runOnUiThread {
@@ -69,38 +68,6 @@ class LoginUserActivity : AppCompatActivity() {
                     }
                 }
             }
-//            runBlocking {
-//            val isLoggedIn = databaseHelper.loginUser(email, password)
-//            if (isLoggedIn) {
-                // Login successful
-//            val response = menuItemServices.customerLogin(email, password)
-
-//            if (response.isSuccessful) {
-//                Toast.makeText(this@LoginUserActivity, "Login successful", Toast.LENGTH_SHORT).show()
-//
-//                val emailIntent = Intent(this, UserProfileActivity::class.java)
-//                emailIntent.putExtra("email", email)
-//                Log.i("intentPut", email)
-//
-//                val loginIntent = Intent(this@LoginUserActivity, MainActivity::class.java)
-//                startActivity(loginIntent)
-//
-//                // Save email data to SharedPreferences
-//                val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//                val editor = sharedPrefs.edit()
-//                editor.putString("email", email)
-//                editor.apply()
-
-                // Finish the current activity
-//                finish()
-//                }  else {
-//                val errorMessage = when (response.code) {
-//                    401 -> "Invalid email or password"
-//                    else -> "Failed to log in"
-//                }
-//                Toast.makeText(this@LoginUserActivity, errorMessage, Toast.LENGTH_SHORT).show()
-//            }
-//            }
         }
     }
 

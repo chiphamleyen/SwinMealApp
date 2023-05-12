@@ -54,35 +54,6 @@ class CustomerServices {
         }
     }
 
-//    suspend fun customerLogin(email: String, password: String): Response {
-//        GlobalScope.launch(Dispatchers.Main) {
-//            try {
-//                withContext(Dispatchers.IO) {
-//                    val loginUrl =
-//                        "http://10.0.2.2:8080/customer/login" // Replace with your login URL
-//
-//                    val httpClient = OkHttpClient()
-//
-//                    val request = Request.Builder()
-//                        .url("$loginUrl?email=$email&password=$password")
-//                        .get()
-//                        .build()
-//
-////                    val response = httpClient.newCall(request).execute()
-////                    println(response)
-////                    if (!response.isSuccessful) {
-////                        throw RuntimeException("Failed to login user")
-////                    }
-//                    return@withContext httpClient.newCall(request).execute()
-////                val response = httpClient.newCall(request).execute()
-////                    return@withContext response
-//                }
-//            } catch (e: Exception) {
-//                // Registration failed, handle the error
-//            }
-//        }
-//    }
-
      fun customerLogin(email: String, password: String, callback: (Response, String?) -> Unit) {
          GlobalScope.launch(Dispatchers.Main) {
              try {
@@ -150,21 +121,47 @@ class CustomerServices {
         }
     }
 
-//    fun getUserProfile (email: String): Customer {
-//        val request = Request.Builder()
-//            .url("http://10.0.2.2:8080/customer/$email")
-//            .build()
-//
-//        val response = httpClient.newCall(request).execute()
-//        println(response)
-//        if (!response.isSuccessful) {
-//            throw RuntimeException("Failed to retrieve user profile")
-//        }
-//
-//        val responseBody = response.body?.string()
-//        return jacksonObjectMapper().readValue(
-//            responseBody ?: "",
-//            Customer::class.java
-//        )
-//    }
+    fun updateProfile(email: String, gender: String, age: Int,
+                      height: Float, weight: Float, activityLevel: String) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                withContext(Dispatchers.IO) {
+                    val updateUrl =
+                        "http://10.0.2.2:8080/customer/editHealthProfile" // Replace with your login URL
+
+                    val httpClient = OkHttpClient()
+
+                    val request = Request.Builder()
+                        .url("$updateUrl?email=$email&gender=$gender&age=$age&height=$height&weight=$weight&activityLevel=$activityLevel")
+                        .get()
+                        .build()
+
+//            val response = httpClient.newCall(request).execute()
+//            println(response)
+//            if (!response.isSuccessful) {
+//                throw RuntimeException("Failed to login user")
+//            }
+//            return@withContext response
+                    httpClient.newCall(request).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            // Handle failure
+                            e.printStackTrace()
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            if (response.isSuccessful) {
+                                // Update successful
+                                println("Customer health profile updated successfully")
+                            } else {
+                                // Update failed
+                                println("Failed to update customer health profile")
+                            }
+                        }
+                    })
+                }
+            } catch (e: Exception) {
+                // Registration failed, handle the error
+            }
+        }
+    }
 }

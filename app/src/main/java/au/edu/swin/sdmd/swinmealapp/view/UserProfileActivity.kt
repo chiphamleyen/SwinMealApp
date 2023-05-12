@@ -1,10 +1,13 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import au.edu.swin.sdmd.swinmealapp.R
@@ -21,6 +24,7 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var heightTextView: TextView
     private lateinit var weightTextView: TextView
     private lateinit var actLevelTextView: TextView
+    private lateinit var update: ImageView
 
     private val menuItemServices = CustomerServices()
 
@@ -35,6 +39,7 @@ class UserProfileActivity : AppCompatActivity() {
         heightTextView = findViewById(R.id.profile_height)
         weightTextView = findViewById(R.id.profile_weight)
         actLevelTextView = findViewById(R.id.profile_activityLevel)
+        update = findViewById(R.id.update_profile)
 //        employeeIDTextView = findViewById(R.id.profile_employeeid)
 //        mobileNumberTextView = findViewById(R.id.profile_mobile)
 
@@ -51,6 +56,15 @@ class UserProfileActivity : AppCompatActivity() {
 
 //            if (user != null) {  // Check if user email is not null
                 // Populate user profile data to TextViews
+        update.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    UserProfileSettings::class.java
+                )
+            )
+        }
+
         menuItemServices.getUserProfile(userEmail) { customer ->
             customer?.let {
                 // Populate user profile data to TextViews
@@ -78,6 +92,13 @@ class UserProfileActivity : AppCompatActivity() {
 
     fun goBack(view: View) {onBackPressed()}
 
-    fun updateProfile(view: View) {}
+//    fun updateProfile(view: View) {
+//        startActivity(
+//            Intent(
+//                this,
+//                UserProfileSettings::class.java
+//            )
+//        )
+//    }
 
 }
