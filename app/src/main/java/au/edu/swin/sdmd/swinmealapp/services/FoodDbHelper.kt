@@ -27,15 +27,15 @@ class FoodDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         // Create current_cart table
         val createCartTable = "CREATE TABLE ${CartContract.CartEntry.CART_TABLE_NAME} (" +
-            "${CartContract.CartEntry.CART_ITEM_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "${CartContract.CartEntry.CART_ITEM_NAME} VARCHAR(256), " +
+            "${CartContract.CartEntry.CART_ITEM_ID} TEXT PRIMARY KEY, " +
+            "${CartContract.CartEntry.CART_ITEM_NAME} TEXT, " +
             "${CartContract.CartEntry.CART_ITEM_PRICE} REAL," +
-            "${CartContract.CartEntry.CART_ITEM_SHORT_DESC} VARCHAR(256)," +
+            "${CartContract.CartEntry.CART_ITEM_SHORT_DESC} TEXT," +
             "${CartContract.CartEntry.CART_ITEM_QTY} INTEGER," +
             "${CartContract.CartEntry.CART_ITEM_STARS} REAL," +
-            "${CartContract.CartEntry.CART_IMAGE_URL} VARCHAR(256),"+
-            "${CartContract.CartEntry.COL_ITEM_ID} INTEGER,"+
-            "FOREIGN KEY (${CartContract.CartEntry.COL_ITEM_ID}) REFERENCES ${FoodContract.FoodEntry.TABLE_NAME}(${FoodContract.FoodEntry.COL_ITEM_ID}))"
+            "${CartContract.CartEntry.CART_IMAGE_URL} TEXT)"
+//            "${CartContract.CartEntry.COL_ITEM_ID} INTEGER,"+
+//            "FOREIGN KEY (${CartContract.CartEntry.COL_ITEM_ID}) REFERENCES ${FoodContract.FoodEntry.TABLE_NAME}(${FoodContract.FoodEntry.COL_ITEM_ID}))"
         db.execSQL(createCartTable)
 
         // Create current_orders table
@@ -89,7 +89,7 @@ object FoodContract {
 object CartContract {
     object CartEntry : BaseColumns {
         const val CART_TABLE_NAME = "current_cart"
-        const val COL_ITEM_ID = "item_id"
+//        const val COL_ITEM_ID = "item_id"
         const val CART_ITEM_ID = "cart_id"
         const val CART_IMAGE_URL = "image_url"
         const val CART_ITEM_NAME = "item_name"

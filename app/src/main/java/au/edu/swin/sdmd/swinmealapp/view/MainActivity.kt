@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -22,6 +23,7 @@ import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import au.edu.swin.sdmd.swinmealapp.datamodels.MenuItem
+import au.edu.swin.sdmd.swinmealapp.datamodels.order.CartItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CartRepository
@@ -218,62 +220,61 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
     //plus button handler
     override fun onPlusBtnClick(item: MenuItem) {
-//        GlobalScope.launch  {
-//            item.quantity += 1
-//            val cartItem = CartItem(
-//                itemID = item.itemID,
-//                itemName = item.itemName,
-//                imageUrl = item.imageUrl,
-//                itemPrice = item.itemPrice,
-//                quantity = item.quantity,
-//                itemStars = item.itemStars,
-//                itemShortDesc = item.itemShortDesc,
+        item.quantity += 1
+        val cartItem = CartItem(
+            itemID = item.itemID,
+            itemName = item.itemName,
+            imageUrl = item.imageUrl,
+            itemPrice = item.itemPrice,
+            quantity = item.quantity,
+            itemStars = item.itemStars,
+            itemShortDesc = item.itemShortDesc,
 //                foodID = item.itemID
-//            )
-//            cartRepository.increaseCartItemQuantity(
-//                cartItem.itemID,
-//                cartItem.itemName,
-//                cartItem.itemPrice,
-//                cartItem.itemShortDesc,
-//                cartItem.imageUrl,
-//                cartItem.itemStars,
-//                cartItem.quantity,
+        )
+        cartRepository.increaseCartItemQuantity(
+            cartItem.itemID,
+            cartItem.itemName,
+            cartItem.itemPrice,
+            cartItem.itemShortDesc,
+            cartItem.imageUrl,
+            cartItem.itemStars,
+            cartItem.quantity,
 //                item.itemID
-//            )
-//
-//            Log.i("quantity: ", item.quantity.toString())
-//            Log.i("cart: ", cartItem.toString())
-//        }
+        )
+
+        Log.i("quantity: ", item.quantity.toString())
+        Log.i("cart: ", cartItem.toString())
+
     }
 
     //minus button handler
     override fun onMinusBtnClick(item: MenuItem) {
-//        GlobalScope.launch {
-//            if (item.quantity > 0) {
-//                item.quantity -= 1
-//                val cartItem = CartItem(
-//                    itemID = item.itemID,
-//                    itemName = item.itemName,
-//                    imageUrl = item.imageUrl,
-//                    itemPrice = item.itemPrice,
-//                    quantity = item.quantity,
-//                    itemStars = item.itemStars,
-//                    itemShortDesc = item.itemShortDesc,
+        GlobalScope.launch {
+            if (item.quantity > 0) {
+                item.quantity -= 1
+                val cartItem = CartItem(
+                    itemID = item.itemID,
+                    itemName = item.itemName,
+                    imageUrl = item.imageUrl,
+                    itemPrice = item.itemPrice,
+                    quantity = item.quantity,
+                    itemStars = item.itemStars,
+                    itemShortDesc = item.itemShortDesc,
 //                    foodID = item.itemID
-//                )
-//
-//                if (item.quantity == 0) {
-//                    // If quantity becomes 0, remove the item from cart
-//                    cartRepository.removeFromCart(cartItem)
-//
-//                } else {
-//                    // Update the cart item quantity
-//                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity, item.itemID)
-//                }
-//                Log.i("quantity: ", item.quantity.toString())
-//                Log.i("cart: ", cartItem.toString())
-//            }
-//        }
+                )
+
+                if (item.quantity == 0) {
+                    // If quantity becomes 0, remove the item from cart
+                    cartRepository.removeFromCart(cartItem)
+
+                } else {
+                    // Update the cart item quantity
+                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity)
+                }
+                Log.i("quantity: ", item.quantity.toString())
+                Log.i("cart: ", cartItem.toString())
+            }
+        }
     }
 
     //displays the items which are of same category
