@@ -31,6 +31,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
+import com.datastax.oss.driver.api.core.type.DataTypes.UUID
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
 
@@ -232,7 +235,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 //                foodID = item.itemID
         )
         cartRepository.increaseCartItemQuantity(
-            cartItem.itemID,
+//            UUID(12,1),
+            "123",
             cartItem.itemName,
             cartItem.itemPrice,
             cartItem.itemShortDesc,

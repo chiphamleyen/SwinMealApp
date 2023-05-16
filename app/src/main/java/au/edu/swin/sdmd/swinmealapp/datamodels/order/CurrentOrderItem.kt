@@ -2,7 +2,7 @@ package au.edu.swin.sdmd.swinmealapp.datamodels.order
 
 // Current Order data model
 data class CurrentOrderItem(
-    var orderID: String = "ORDER_ID",
+    var orderId: String = "ORDER_ID",
     var takeAwayTime: String = "TAKE_AWAY_TIME",
     var paymentStatus: String = "PAYMENT_STATUS",
     var orderItemNames: String = "ORDER_ITEM_NAMES",

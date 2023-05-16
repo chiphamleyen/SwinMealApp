@@ -1,5 +1,6 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
+import android.content.Context
 import au.edu.swin.sdmd.swinmealapp.adapters.RecyclerCurrentOrderAdapter
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +11,23 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
 import au.edu.swin.sdmd.swinmealapp.datamodels.order.CurrentOrderItem
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CurrentOrderRepository
+import au.edu.swin.sdmd.swinmealapp.services.OrderServices
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.OnItemClickListener {
     private val currentOrderList = ArrayList<CurrentOrderItem>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: RecyclerCurrentOrderAdapter
+
+    private var orderServices = OrderServices()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,32 +42,43 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
     }
 
     // Retrieve data from database
-    private fun loadCurrentOrdersFromDatabase() {
+    private  fun loadCurrentOrdersFromDatabase() {
 
-        val db = CurrentOrderRepository(this)
-        val data = db.readCurrentOrdersData()
+//        val db = CurrentOrderRepository(this)
+//        val data = db.readCurrentOrdersData()
+//
+//        if(data.isEmpty()) {
+//            return
+//        }
+        val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
 
-        if(data.isEmpty()) {
-            return
+        orderServices.getAllCurrentOrders(userEmail) { data ->
+            data?.let {
+                findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility =
+                    ViewGroup.GONE
+                for (i in 0 until data.size) {
+                    val currentOrderItem = CurrentOrderItem()
+
+                    currentOrderItem.orderId = data[i].orderId
+                    currentOrderItem.takeAwayTime = data[i].takeAwayTime
+                    currentOrderItem.paymentStatus = data[i].paymentStatus
+                    currentOrderItem.orderItemNames = data[i].orderItemNames
+                    currentOrderItem.orderItemQuantities = data[i].orderItemQuantities
+                    currentOrderItem.totalItemPrice = data[i].totalItemPrice
+                    currentOrderItem.tax = data[i].tax
+                    currentOrderItem.subTotal = data[i].subTotal
+                    currentOrderList.add(currentOrderItem)
+                    currentOrderList.reverse()
+                    recyclerAdapter.notifyItemRangeInserted(0, data.size)
+                    Log.i("current act", currentOrderItem.toString())
+                }
+            }
         }
 
-        findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.GONE
-        for(i in 0 until data.size) {
-            val currentOrderItem =  CurrentOrderItem()
 
-            currentOrderItem.orderID = data[i].orderID
-            currentOrderItem.takeAwayTime = data[i].takeAwayTime
-            currentOrderItem.paymentStatus = data[i].paymentStatus
-            currentOrderItem.orderItemNames = data[i].orderItemNames
-            currentOrderItem.orderItemQuantities = data[i].orderItemQuantities
-            currentOrderItem.totalItemPrice = data[i].totalItemPrice
-            currentOrderItem.tax = data[i].tax
-            currentOrderItem.subTotal = data[i].subTotal
-            currentOrderList.add(currentOrderItem)
-            currentOrderList.reverse()
-            recyclerAdapter.notifyItemRangeInserted(0, data.size)
-            Log.i("current act", currentOrderItem.toString())
-        }
+
     }
 
     //confirm to receive order successfully and delete the item in  the list
@@ -68,7 +87,12 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
             .setTitle("Food Received")
             .setMessage("Are you done this order?")
             .setPositiveButton("Yes, I have received the food", DialogInterface.OnClickListener { dialogInterface, _ ->
-                val result = CurrentOrderRepository(this).confirmOrderDone(currentOrderList[position].orderID)
+                val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+                val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+                val id = currentOrderList[position].orderId
+
+                val result: String = orderServices.confirmOrderDone(userEmail, id).toString()
+
                 currentOrderList.removeAt(position)
                 recyclerAdapter.notifyItemRemoved(position)
                 recyclerAdapter.notifyItemRangeChanged(position, currentOrderList.size)
@@ -88,15 +112,24 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
 
     //delete the item in  the list
     override fun cancelOrder(position: Int) {
+
         AlertDialog.Builder(this)
             .setTitle("Order Cancellation")
             .setMessage("Are you sure you want to cancel this order?")
             .setPositiveButton("Yes, Cancel Order", DialogInterface.OnClickListener { dialogInterface, _ ->
-                val result = CurrentOrderRepository(this).deleteCurrentOrderRecord(currentOrderList[position].orderID)
+//                val result = CurrentOrderRepository(this).deleteCurrentOrderRecord(currentOrderList[position].orderId)
+
+                val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+                val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+                var id = currentOrderList[position].orderId
+                Log.i("position", id)
+                orderServices.orderCancel(userEmail, id)
+
+
                 currentOrderList.removeAt(position)
                 recyclerAdapter.notifyItemRemoved(position)
                 recyclerAdapter.notifyItemRangeChanged(position, currentOrderList.size)
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
 
                 if(currentOrderList.isEmpty()) {
                     findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.VISIBLE

@@ -75,6 +75,12 @@ class UserProfileActivity : AppCompatActivity() {
                 heightTextView.text = it.height.toString()
                 weightTextView.text = it.weight.toString()
                 actLevelTextView.text = it.activityLevel
+
+                val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+                val editor = sharedPrefs.edit()
+                editor.putString("emailOrder", it.email)
+                editor.putString("nameOrder", it.name)
+                editor.apply()
             } ?: run {
                 // Handle the case when customer is null (error occurred)
                 Toast.makeText(this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()
@@ -91,14 +97,5 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     fun goBack(view: View) {onBackPressed()}
-
-//    fun updateProfile(view: View) {
-//        startActivity(
-//            Intent(
-//                this,
-//                UserProfileSettings::class.java
-//            )
-//        )
-//    }
 
 }

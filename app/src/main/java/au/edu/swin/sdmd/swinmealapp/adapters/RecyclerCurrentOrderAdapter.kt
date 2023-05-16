@@ -58,7 +58,7 @@ class RecyclerCurrentOrderAdapter(
         // Set data to corresponding views
         holder.takeAwayTimeTV.text = currentItem.takeAwayTime
         holder.paymentStatusTV.text = currentItem.paymentStatus
-        holder.orderIDTV.text = currentItem.orderID
+        holder.orderIDTV.text = currentItem.orderId
         holder.totalItemPriceTV.text = "\$%.2f".format(currentItem.totalItemPrice.toFloat())
         holder.totalTaxTV.text = "\$%.2f".format(currentItem.tax.toFloat())
         holder.subTotalTV.text = "\$%.2f".format(currentItem.subTotal.toFloat())

@@ -1,6 +1,7 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import au.edu.swin.sdmd.swinmealapp.datamodels.order.OrderHistoryItem
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CartRepository
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CurrentOrderRepository
 import au.edu.swin.sdmd.swinmealapp.frontend.order.control.HistoryRepository
+import au.edu.swin.sdmd.swinmealapp.services.OrderServices
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,6 +41,8 @@ class OrderDoneActivity : AppCompatActivity() {
 
     private var orderID = ""
     private var orderDate = ""
+
+    private val orderServices = OrderServices()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,9 +75,9 @@ class OrderDoneActivity : AppCompatActivity() {
             completeLL.visibility = ViewGroup.VISIBLE
         }, 2000)
 
-        generateOrderID()
-        setCurrentDateAndTime()
-        saveOrderRecordToDatabase()
+
+        saveOrderData()
+//        saveOrderRecordToDatabase()
 
         findViewById<ImageView>(R.id.order_done_show_qr_iv).setOnClickListener { showQRCode() }
         findViewById<ImageView>(R.id.order_done_share_iv).setOnClickListener { shareOrder() }
@@ -128,9 +132,42 @@ class OrderDoneActivity : AppCompatActivity() {
             totalTaxPrice.toString(),
             subTotalPrice.toString()
         )
-        val db = CurrentOrderRepository(this)
-        db.insertCurrentOrdersData(item)
+//        val db = CurrentOrderRepository(this)
+//        db.insertCurrentOrdersData(item)
+//        val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+//        val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+//        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
+//        orderServices.addNewCurrentOrder(userEmail, userName, item)
         Log.i("current order", item.toString())
+    }
+
+    private fun saveOrderData() {
+        generateOrderID()
+        setCurrentDateAndTime()
+
+        val current = CurrentOrderItem(
+            orderID,
+            takeAwayTime,
+            if(paymentMethod.startsWith("Pending")) "Pending" else "Done",
+            getOrderItemNames(),
+            getOrderItemQty(),
+            totalItemPrice.toString(),
+            totalTaxPrice.toString(),
+            subTotalPrice.toString()
+        )
+
+        val history = OrderHistoryItem(
+            orderDate,
+            orderID, "Order Successful",
+            paymentMethod,
+            "\$%.2f".format(subTotalPrice)
+        )
+
+        val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
+
+        orderServices.addNewOrder(userEmail, userName, history, current)
     }
 
     //cancel handler

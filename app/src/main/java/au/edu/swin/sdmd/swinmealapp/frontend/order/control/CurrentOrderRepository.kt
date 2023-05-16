@@ -15,7 +15,7 @@ class CurrentOrderRepository(context: Context) {
         val db = dbHelper.writableDatabase
         val cv = ContentValues()
 
-        cv.put(CurrentCartContract.CurrentCartEntry.COL_CURRENT_ORDER_ID, item.orderID)
+        cv.put(CurrentCartContract.CurrentCartEntry.COL_CURRENT_ORDER_ID, item.orderId)
         cv.put(CurrentCartContract.CurrentCartEntry.COL_CURRENT_ORDER_TAKE_AWAY_TIME, item.takeAwayTime)
         cv.put(CurrentCartContract.CurrentCartEntry.COL_CURRENT_ORDER_PAYMENT_STATUS, item.paymentStatus)
         cv.put(CurrentCartContract.CurrentCartEntry.COL_CURRENT_ORDER_ITEM_NAMES, item.orderItemNames)
