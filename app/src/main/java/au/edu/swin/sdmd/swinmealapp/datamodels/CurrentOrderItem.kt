@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.swinmealapp.datamodels.order
+package au.edu.swin.sdmd.swinmealapp.datamodels
 
 // Current Order data model
 data class CurrentOrderItem(

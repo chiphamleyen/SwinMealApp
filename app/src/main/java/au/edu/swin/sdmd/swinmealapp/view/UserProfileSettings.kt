@@ -12,7 +12,6 @@ import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 import com.google.android.material.textfield.TextInputEditText
 
 class UserProfileSettings : AppCompatActivity() {
-//    private lateinit var fullNameTIL: TextInputEditText
     private lateinit var genderTIL: TextInputEditText
     private lateinit var ageTIL: TextInputEditText
     private lateinit var heightTIL: TextInputEditText
@@ -37,8 +36,6 @@ class UserProfileSettings : AppCompatActivity() {
         val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val userEmail = sharedPrefs.getString("email", "") ?: ""
         Log.i("profile update email", userEmail.toString())
-
-//        val userEmail = "chipham@gmail.com"
 
         saveBtn.setOnClickListener {
             val gender = genderTIL.text.toString()

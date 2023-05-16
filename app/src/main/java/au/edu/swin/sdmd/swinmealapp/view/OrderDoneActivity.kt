@@ -16,11 +16,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import au.edu.swin.sdmd.swinmealapp.R
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.CurrentOrderItem
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.OrderHistoryItem
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CartRepository
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CurrentOrderRepository
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.HistoryRepository
+import au.edu.swin.sdmd.swinmealapp.datamodels.CurrentOrderItem
+import au.edu.swin.sdmd.swinmealapp.datamodels.OrderHistoryItem
+import au.edu.swin.sdmd.swinmealapp.services.CartRepository
 import au.edu.swin.sdmd.swinmealapp.services.OrderServices
 import java.text.SimpleDateFormat
 import java.util.*
@@ -77,7 +75,6 @@ class OrderDoneActivity : AppCompatActivity() {
 
 
         saveOrderData()
-//        saveOrderRecordToDatabase()
 
         findViewById<ImageView>(R.id.order_done_show_qr_iv).setOnClickListener { showQRCode() }
         findViewById<ImageView>(R.id.order_done_share_iv).setOnClickListener { shareOrder() }
@@ -111,36 +108,7 @@ class OrderDoneActivity : AppCompatActivity() {
         dateAndTimeTV.text = orderDate
     }
 
-    //save data to database
-    private fun saveOrderRecordToDatabase() {
-        val item = OrderHistoryItem(orderDate, orderID, "Order Successful", paymentMethod, "\$%.2f".format(subTotalPrice))
-        val db = HistoryRepository(this)
-        db.insertOrderData(item)
-
-        saveCurrentOrderToDatabase()
-    }
-
-    //save data to database
-    private fun saveCurrentOrderToDatabase() {
-        val item = CurrentOrderItem(
-            orderID,
-            takeAwayTime,
-            if(paymentMethod.startsWith("Pending")) "Pending" else "Done",
-            getOrderItemNames(),
-            getOrderItemQty(),
-            totalItemPrice.toString(),
-            totalTaxPrice.toString(),
-            subTotalPrice.toString()
-        )
-//        val db = CurrentOrderRepository(this)
-//        db.insertCurrentOrdersData(item)
-//        val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
-//        val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
-//        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
-//        orderServices.addNewCurrentOrder(userEmail, userName, item)
-        Log.i("current order", item.toString())
-    }
-
+    //save data
     private fun saveOrderData() {
         generateOrderID()
         setCurrentDateAndTime()
@@ -155,17 +123,21 @@ class OrderDoneActivity : AppCompatActivity() {
             totalTaxPrice.toString(),
             subTotalPrice.toString()
         )
+        Log.i("current order", current.toString())
 
         val history = OrderHistoryItem(
             orderDate,
-            orderID, "Order Successful",
+            orderID,
+            "Order Successful",
             paymentMethod,
             "\$%.2f".format(subTotalPrice)
         )
+        Log.i("history order", history.toString())
 
         val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
         val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
         val userName = sharedPrefs.getString("nameOrder", "") ?: ""
+        Log.i("user", userEmail + userName)
 
         orderServices.addNewOrder(userEmail, userName, history, current)
     }
@@ -176,8 +148,11 @@ class OrderDoneActivity : AppCompatActivity() {
             .setTitle("Order Cancellation")
             .setMessage("Are you sure you want to cancel this order?")
             .setPositiveButton("Yes, Cancel Order", DialogInterface.OnClickListener { _, _ ->
-                val result = CurrentOrderRepository(this).deleteCurrentOrderRecord(orderID)
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+//                val result = CurrentOrderRepository(this).deleteCurrentOrderRecord(orderID)
+                val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+                val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
+                orderServices.orderCancel(userEmail, orderID)
+                Toast.makeText(this, "Order Canceled", Toast.LENGTH_SHORT).show()
                 onBackPressed()
             })
             .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, _ ->

@@ -1,11 +1,8 @@
-package au.edu.swin.sdmd.swinmealapp.frontend.order.control
+package au.edu.swin.sdmd.swinmealapp.services
 
 import android.content.ContentValues
 import android.content.Context
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.CartItem
-import au.edu.swin.sdmd.swinmealapp.services.CartContract
-import au.edu.swin.sdmd.swinmealapp.services.FoodContract
-import au.edu.swin.sdmd.swinmealapp.services.FoodDbHelper
+import au.edu.swin.sdmd.swinmealapp.datamodels.CartItem
 
 class CartRepository(context: Context) {
     private val dbHelper = FoodDbHelper(context)

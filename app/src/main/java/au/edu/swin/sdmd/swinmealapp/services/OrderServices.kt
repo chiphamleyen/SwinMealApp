@@ -1,11 +1,8 @@
 package au.edu.swin.sdmd.swinmealapp.services
 
-import android.util.Log
-import au.edu.swin.sdmd.swinmealapp.datamodels.Customer
-import au.edu.swin.sdmd.swinmealapp.datamodels.MenuItem
 import au.edu.swin.sdmd.swinmealapp.datamodels.RequestWrapper
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.CurrentOrderItem
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.OrderHistoryItem
+import au.edu.swin.sdmd.swinmealapp.datamodels.CurrentOrderItem
+import au.edu.swin.sdmd.swinmealapp.datamodels.OrderHistoryItem
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import kotlinx.coroutines.Dispatchers

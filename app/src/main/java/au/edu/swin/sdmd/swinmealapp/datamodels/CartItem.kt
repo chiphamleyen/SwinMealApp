@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.swinmealapp.datamodels.order
+package au.edu.swin.sdmd.swinmealapp.datamodels
 
 // Cart data model
 data class CartItem(

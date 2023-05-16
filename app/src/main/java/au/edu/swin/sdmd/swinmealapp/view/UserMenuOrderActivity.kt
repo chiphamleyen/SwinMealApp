@@ -16,8 +16,8 @@ import android.widget.TimePicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.CartItem
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CartRepository
+import au.edu.swin.sdmd.swinmealapp.datamodels.CartItem
+import au.edu.swin.sdmd.swinmealapp.services.CartRepository
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*

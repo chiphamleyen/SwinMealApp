@@ -15,8 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.OrderHistoryItem
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.HistoryRepository
+import au.edu.swin.sdmd.swinmealapp.datamodels.OrderHistoryItem
 import au.edu.swin.sdmd.swinmealapp.services.OrderServices
 
 class OrdersHistoryActivity : AppCompatActivity() {
@@ -50,9 +49,9 @@ class OrdersHistoryActivity : AppCompatActivity() {
 
         orderServices.getAllHistoryOrders(userEmail) { data ->
             data?.let {
-//                if (data.size == 0) {
-//                    deleteRecordsIV.visibility = ViewGroup.INVISIBLE
-//                }
+                if (data.size == 0) {
+                    deleteRecordsIV.visibility = ViewGroup.INVISIBLE
+                }
 
                 //display data
                 findViewById<LinearLayout>(R.id.order_history_empty_indicator_ll).visibility =
@@ -64,12 +63,13 @@ class OrdersHistoryActivity : AppCompatActivity() {
                     item.orderStatus = data[i].orderStatus
                     item.orderPayment = data[i].orderPayment
                     item.price = data[i].price
+
                     if (item.orderStatus == "Order Done" || item.orderStatus == "Order Cancel"){
                         orderHistoryList.add(item)
                         deleteRecordsIV.setOnClickListener { deleteOrderHistoryRecords(orderHistoryList) }
-
+                        orderHistoryList.reverse()
                     }
-                    orderHistoryList.reverse()
+
                     recyclerAdapter.notifyItemRangeInserted(0, data.size)
                     Log.i("history act", item.toString())
                 }

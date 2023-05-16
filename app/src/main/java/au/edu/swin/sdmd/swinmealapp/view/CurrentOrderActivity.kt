@@ -11,16 +11,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
-import au.edu.swin.sdmd.swinmealapp.datamodels.order.CurrentOrderItem
-import au.edu.swin.sdmd.swinmealapp.frontend.order.control.CurrentOrderRepository
+import au.edu.swin.sdmd.swinmealapp.datamodels.CurrentOrderItem
 import au.edu.swin.sdmd.swinmealapp.services.OrderServices
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.OnItemClickListener {
     private val currentOrderList = ArrayList<CurrentOrderItem>()
@@ -44,20 +39,16 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
     // Retrieve data from database
     private  fun loadCurrentOrdersFromDatabase() {
 
-//        val db = CurrentOrderRepository(this)
-//        val data = db.readCurrentOrdersData()
-//
-//        if(data.isEmpty()) {
-//            return
-//        }
         val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
         val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
-        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
 
         orderServices.getAllCurrentOrders(userEmail) { data ->
             data?.let {
-                findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility =
-                    ViewGroup.GONE
+                if(data.isEmpty()) {
+                    findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.VISIBLE
+                }
+
+                findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.GONE
                 for (i in 0 until data.size) {
                     val currentOrderItem = CurrentOrderItem()
 
@@ -76,9 +67,6 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
                 }
             }
         }
-
-
-
     }
 
     //confirm to receive order successfully and delete the item in  the list
@@ -91,12 +79,12 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
                 val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
                 val id = currentOrderList[position].orderId
 
-                val result: String = orderServices.confirmOrderDone(userEmail, id).toString()
+                orderServices.confirmOrderDone(userEmail, id)
 
                 currentOrderList.removeAt(position)
                 recyclerAdapter.notifyItemRemoved(position)
                 recyclerAdapter.notifyItemRangeChanged(position, currentOrderList.size)
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Order Received", Toast.LENGTH_SHORT).show()
 
                 if(currentOrderList.isEmpty()) {
                     findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.VISIBLE
@@ -117,7 +105,6 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
             .setTitle("Order Cancellation")
             .setMessage("Are you sure you want to cancel this order?")
             .setPositiveButton("Yes, Cancel Order", DialogInterface.OnClickListener { dialogInterface, _ ->
-//                val result = CurrentOrderRepository(this).deleteCurrentOrderRecord(currentOrderList[position].orderId)
 
                 val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
                 val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
@@ -125,11 +112,10 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
                 Log.i("position", id)
                 orderServices.orderCancel(userEmail, id)
 
-
                 currentOrderList.removeAt(position)
                 recyclerAdapter.notifyItemRemoved(position)
                 recyclerAdapter.notifyItemRangeChanged(position, currentOrderList.size)
-                Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Order Cancelled", Toast.LENGTH_SHORT).show()
 
                 if(currentOrderList.isEmpty()) {
                     findViewById<LinearLayout>(R.id.current_order_empty_indicator_ll).visibility = ViewGroup.VISIBLE

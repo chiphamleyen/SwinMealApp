@@ -18,8 +18,6 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private lateinit var fullNameTIL: TextInputEditText
     private lateinit var emailTIL: TextInputEditText
-//    private lateinit var employeeIDTIL: TextInputEditText
-//    private lateinit var mobileNumberTIL: TextInputEditText
     private lateinit var createPasswordTIL: TextInputEditText
     private lateinit var confirmPasswordTIL: TextInputEditText
 
@@ -35,8 +33,6 @@ class RegisterUserActivity : AppCompatActivity() {
 
         fullNameTIL = findViewById(R.id.fullname)
         emailTIL = findViewById(R.id.email)
-//        employeeIDTIL = findViewById(R.id.employeeId)
-//        mobileNumberTIL = findViewById(R.id.mobile)
         createPasswordTIL = findViewById(R.id.password)
         confirmPasswordTIL = findViewById(R.id.cfpassword)
 
