@@ -73,191 +73,197 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="581dp"
                     android:layout_marginTop="15dp"
                     android:clipToPadding="false"
                     android:orientation="vertical"
                     android:paddingHorizontal="20dp"
                     android:paddingBottom="100dp">
 
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        android:id="@+id/edit_profile_name"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:errorEnabled="true"-->
-<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+                    <!--                    <com.google.android.material.textfield.TextInputLayout-->
+                    <!--                        android:id="@+id/edit_profile_name"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        app:errorEnabled="true"-->
+                    <!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
 
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:id="@+id/fullname"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:drawableStart="@drawable/ic_user"-->
-<!--                            android:drawablePadding="10dp"-->
-<!--                            android:hint="@string/full_name"-->
-<!--                            android:inputType="text" />-->
+                    <!--                        <com.google.android.material.textfield.TextInputEditText-->
+                    <!--                            android:id="@+id/fullname"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:drawableStart="@drawable/ic_user"-->
+                    <!--                            android:drawablePadding="10dp"-->
+                    <!--                            android:hint="@string/full_name"-->
+                    <!--                            android:inputType="text" />-->
 
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+                    <!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <!--                    <androidx.cardview.widget.CardView-->
+                    <!--                        android:onClick="chooseModeOfPayment"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginBottom="10dp"-->
+                    <!--                        app:cardCornerRadius="5dp"-->
+                    <!--                        android:elevation="0dp"-->
+                    <!--                        app:cardElevation="0dp"-->
+                    <!--                        android:background="@color/white">-->
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_margin="15dp"-->
+                    <!--                            android:orientation="horizontal"-->
+                    <!--                            android:gravity="center_vertical">-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_weight="1"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:text="@string/male"-->
+                    <!--                                android:textSize="16sp"-->
+                    <!--                                android:textColor="@color/text_dark_color"/>-->
+
+                    <!--                            <RadioButton-->
+                    <!--                                android:id="@+id/cash_payment_radio_btn"-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:minWidth="0dp"-->
+                    <!--                                android:minHeight="0dp"-->
+                    <!--                                android:checked="true"-->
+                    <!--                                android:onClick="chooseModeOfPayment"/>-->
+
+                    <!--                            <TextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_weight="1"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:text="@string/female"-->
+                    <!--                                android:textSize="16sp"-->
+                    <!--                                android:textColor="@color/text_dark_color"/>-->
+
+                    <!--                            <RadioButton-->
+                    <!--                                android:id="@+id/cash_payment_radio_btn"-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:minWidth="0dp"-->
+                    <!--                                android:minHeight="0dp"-->
+                    <!--                                android:checked="true"-->
+                    <!--                                android:onClick="chooseModeOfPayment"/>-->
+                    <!--                        </LinearLayout>-->
+                    <!--                    </androidx.cardview.widget.CardView>-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_profile_gender"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_height="61dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_user"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/gender"
-                            android:inputType="text" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:onClick="chooseModeOfPayment"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="10dp"-->
-<!--                        app:cardCornerRadius="5dp"-->
-<!--                        android:elevation="0dp"-->
-<!--                        app:cardElevation="0dp"-->
-<!--                        android:background="@color/white">-->
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_margin="15dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:gravity="center_vertical">-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="@string/male"-->
-<!--                                android:textSize="16sp"-->
-<!--                                android:textColor="@color/text_dark_color"/>-->
-
-<!--                            <RadioButton-->
-<!--                                android:id="@+id/cash_payment_radio_btn"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:minWidth="0dp"-->
-<!--                                android:minHeight="0dp"-->
-<!--                                android:checked="true"-->
-<!--                                android:onClick="chooseModeOfPayment"/>-->
-
-<!--                            <TextView-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text="@string/female"-->
-<!--                                android:textSize="16sp"-->
-<!--                                android:textColor="@color/text_dark_color"/>-->
-
-<!--                            <RadioButton-->
-<!--                                android:id="@+id/cash_payment_radio_btn"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:minWidth="0dp"-->
-<!--                                android:minHeight="0dp"-->
-<!--                                android:checked="true"-->
-<!--                                android:onClick="chooseModeOfPayment"/>-->
-<!--                        </LinearLayout>-->
-<!--                    </androidx.cardview.widget.CardView>-->
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/gender"
+                            android:src="@drawable/ic_gender"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="15dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/edit_profile_age"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/age"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/age_custom"
+                            android:drawablePadding="10dp"
                             android:hint="@string/age"
                             android:inputType="number"
-                            android:maxLength="10"
-                            android:drawableStart="@drawable/age_custom"
-                            android:drawablePadding="10dp"/>
+                            android:maxLength="10" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/edit_profile_height"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/height"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/height"
-                            android:inputType="number"
-                            android:maxLength="10"
                             android:drawableStart="@drawable/height_custom"
-                            android:drawablePadding="10dp"/>
+                            android:drawablePadding="10dp"
+                            android:hint="Height (cm)"
+                            android:inputType="number"
+                            android:maxLength="10" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/edit_profile_weight"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/weight"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/weight"
-                            android:inputType="number"
-                            android:maxLength="10"
                             android:drawableStart="@drawable/weight_custom"
-                            android:drawablePadding="10dp"/>
+                            android:drawablePadding="10dp"
+                            android:hint="Weight (kg)"
+                            android:inputType="number"
+                            android:maxLength="10" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_profile_actLevel"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_height="59dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/actLevel"
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="16dp"
+                            android:contentDescription="@string/activityLevel"
+                            android:src="@drawable/actlevel_custom"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.551" />
+
+                        <Spinner
+                            android:id="@+id/activeLevel"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/actlevel_custom"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/activityLevel"
-                            android:inputType="text" />
+                            android:prompt="Activity Level"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.036"
+                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.485" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <Button
+                        android:id="@+id/saveBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <Button
-                            android:id="@+id/saveBtn"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="Save"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:enabled="true"/>
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:enabled="true"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>

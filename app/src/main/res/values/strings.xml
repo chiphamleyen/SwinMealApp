@@ -38,6 +38,8 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="activityLevel">Activity Level</string>
+    <string name="bmi">BMI</string>
+    <string name="tdee">TDEE</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_password">Create Password</string>
     <string name="employee_id">Employee ID</string>
@@ -110,6 +112,7 @@
     <string name="mm_yy">MM/YY</string>
     <string name="saved_details">Saved Details</string>
     <string name="food_menu">Food Menu</string>
+    <string name="meal_suggest">Meal Suggest</string>
     <string name="account">Account</string>
     <string name="profile">Profile</string>
     <string name="update_menu">Update Menu</string>
@@ -156,4 +159,20 @@
     <string name="show_this_qr_code_to_your_office_canteen">Show this QR Code to your Office Canteen</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="genders_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="activeLevel_array">
+        <item>Sedentary</item>
+        <item>Lightly active</item>
+        <item>Moderately active</item>
+        <item>Very active</item>
+        <item>Super active</item>
+        <!--        (little to no exercise)-->
+        <!--        (light exercise/sports 1-3 days a week)-->
+        <!--        (moderate exercise/sports 3-5 days a week)-->
+        <!--        (hard exercise/sports 6-7 days a week)-->
+        <!--        (very hard exercise/sports and physical job or 2x training)-->
+    </string-array>
 </resources>
