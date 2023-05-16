@@ -266,6 +266,17 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                 R.id.nav_food_menu -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
+                R.id.nav_meal_suggest -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    Handler().postDelayed({
+                        startActivity(
+                            Intent(
+                                this,
+                                MealSuggestActivity::class.java
+                            )
+                        )
+                    }, drawerDelay)
+                }
                 R.id.nav_profile -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     Handler().postDelayed({

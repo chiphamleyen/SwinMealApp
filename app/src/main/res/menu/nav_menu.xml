@@ -10,6 +10,11 @@
             android:icon="@drawable/ic_food_menu"
             android:title="@string/food_menu"
             android:checked="true"/>
+        <item
+            android:id="@+id/nav_meal_suggest"
+            android:checked="true"
+            android:icon="@drawable/ic_star"
+            android:title="@string/meal_suggest" />
     </group>
 
     <group
