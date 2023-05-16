@@ -175,11 +175,11 @@ class OrderServices {
         }
     }
 
-    fun deleteHistoryData(email: String) {
+    fun deleteHistoryData(email: String, orderId: String) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8080/order/history-delete?email=$email")
+                    .url("http://10.0.2.2:8080/order/history-delete?email=$email&orderId=$orderId")
                     .delete()
                     .build()
 

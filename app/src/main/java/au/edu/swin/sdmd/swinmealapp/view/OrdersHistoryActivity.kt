@@ -39,24 +39,19 @@ class OrdersHistoryActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         deleteRecordsIV = findViewById(R.id.order_history_delete_records_iv)
-        deleteRecordsIV.setOnClickListener { deleteOrderHistoryRecords() }
 
         loadOrderHistoryListFromDatabase()
     }
 
     //read data from database
     private fun loadOrderHistoryListFromDatabase() {
-//        val db = HistoryRepository(this)
-//        val data = db.readOrderData()
         val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
         val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
-        val userName = sharedPrefs.getString("nameOrder", "") ?: ""
 
         orderServices.getAllHistoryOrders(userEmail) { data ->
             data?.let {
 //                if (data.size == 0) {
 //                    deleteRecordsIV.visibility = ViewGroup.INVISIBLE
-//                    return
 //                }
 
                 //display data
@@ -69,7 +64,11 @@ class OrdersHistoryActivity : AppCompatActivity() {
                     item.orderStatus = data[i].orderStatus
                     item.orderPayment = data[i].orderPayment
                     item.price = data[i].price
-                    orderHistoryList.add(item)
+                    if (item.orderStatus == "Order Done" || item.orderStatus == "Order Cancel"){
+                        orderHistoryList.add(item)
+                        deleteRecordsIV.setOnClickListener { deleteOrderHistoryRecords(orderHistoryList) }
+
+                    }
                     orderHistoryList.reverse()
                     recyclerAdapter.notifyItemRangeInserted(0, data.size)
                     Log.i("history act", item.toString())
@@ -79,23 +78,18 @@ class OrdersHistoryActivity : AppCompatActivity() {
     }
 
     //delete all order history
-    private fun deleteOrderHistoryRecords() {
+    private fun deleteOrderHistoryRecords(orderHistoryList: ArrayList<OrderHistoryItem>) {
         AlertDialog.Builder(this)
             .setMessage("Are you sure you want delete all your order history?")
             .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, _ ->
                 val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
                 val userEmail = sharedPrefs.getString("emailOrder", "") ?: ""
-                val userName = sharedPrefs.getString("nameOrder", "") ?: ""
 
-                orderServices.deleteHistoryData(userEmail)
-
-//                val filteredOrderHistoryList = orderHistoryList.filter { it.orderStatus != "ORDER DONE" && it.orderStatus != "ORDER CANCEL" }
-//                val orderIdsToDelete = filteredOrderHistoryList.map { it.orderId }
-//
-//                // Call the delete API or perform the delete operation on the backend
-//                for (orderId in orderIdsToDelete) {
-//                    orderServices.deleteHistoryData(userEmail)
-//                }
+                for (i in orderHistoryList){
+                    var orderId = i.orderId
+                    Log.i("orderid history", orderId)
+                    orderServices.deleteHistoryData(userEmail, orderId)
+                }
 
                 deleteRecordsIV.visibility = ViewGroup.INVISIBLE
                 findViewById<LinearLayout>(R.id.order_history_empty_indicator_ll).visibility = ViewGroup.VISIBLE

@@ -191,9 +191,10 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         // Display the list of food items
         //search function
 
-        loadSearchTask(foodList)
+
         lifecycleScope.launch {
             foodList = withContext(Dispatchers.IO) { menuItemServices.getMenuItems() }
+            loadSearchTask(foodList)
             adapter = RecyclerFoodItemAdapter(foodList as MutableList<MenuItem>, this@MainActivity)
             itemRecyclerView.adapter = adapter
         }
