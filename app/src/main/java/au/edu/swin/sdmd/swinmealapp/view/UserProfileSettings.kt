@@ -90,8 +90,10 @@ class UserProfileSettings : AppCompatActivity() {
             val height = heightTIL.text.toString()
             val weight = weightTIL.text.toString()
             val actLevel = selectedActiveLevel.toString().lowercase()
-            if (gender.isEmpty() || age.isEmpty() || height.isEmpty() || weight.isEmpty() || actLevel.isEmpty() || age <= 0.toString() || height <= 0.toString() || weight <= 0.toString()) {
+            if (gender.isEmpty() || age.isEmpty() || height.isEmpty() || weight.isEmpty() || actLevel.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            } else if (age <= 0.toString() || height <= 0.toString() || weight <= 0.toString()){
+                Toast.makeText(this, "Please input valid numbers", Toast.LENGTH_SHORT).show()
             } else {
                 Log.i("profile update", gender + age + height + weight + actLevel)
                 updateProfile(userEmail, gender, age.toInt(), height.toFloat(), weight.toFloat(), actLevel)

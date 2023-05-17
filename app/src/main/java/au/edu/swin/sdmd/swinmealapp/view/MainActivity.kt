@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     private lateinit var slideshowCV: CardView
     private var searchIsActive = false
 
-    private lateinit var checkProfile : String
+    private var checkProfile: Int? = null
 
     var foodList = listOf<MenuItem>()
     val imageList = ArrayList<SlideModel>()
@@ -77,14 +77,11 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         val userEmail = sharedPrefs.getString("email", "") ?: ""
         customerServices.getUserProfile(userEmail) {
             customer -> customer?.let {
-            checkProfile = it.age.toString()
-
-            val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
-            val editor1 = sharedPrefs.edit()
-            editor1.putString("emailOrder", it.email)
-            editor1.putString("nameOrder", it.name)
-            editor1.apply()
-        }
+                val editor1 = sharedPrefs.edit()
+                editor1.putString("emailOrder", it.email)
+                editor1.putString("nameOrder", it.name)
+                editor1.apply()
+            }
         }
         imageList.add(SlideModel("https://c0.wallpaperflare.com/preview/5/307/817/pizza-courier-online-cheese.jpg"))
         imageList.add(SlideModel("https://tasteforlife.com/sites/default/files/styles/facebook/public/healthy-recipes/soups/pho-bo-spicy-beef-vietnamese-noodle-soup/pho-bo-spicy-beef-vietnamese-noodle-soup.jpg?itok=3f4AcJoW", "Special Meal"))
@@ -293,7 +290,15 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_meal_suggest -> {
-                    if (checkProfile == 0.toString()) {
+                    val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                    val userEmail = sharedPrefs.getString("email", "") ?: ""
+                    customerServices.getUserProfile(userEmail) {
+                        customer -> customer?.let {
+                            checkProfile = it.age
+                        }
+                    }
+                    Log.i("checkProfile", checkProfile.toString())
+                    if (checkProfile == null) {
                         Toast.makeText(this, "Please update user profile to use this feature", Toast.LENGTH_SHORT).show()
                     } else {
                         drawerLayout.closeDrawer(GravityCompat.START)
