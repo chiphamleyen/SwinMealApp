@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_theme_color"
+    tools:context=".view.UserProfileActivity"
     android:orientation="vertical"
-    tools:context=".view.UserProfileActivity">
+    android:background="@color/purple_theme_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_theme_color"
+        android:paddingVertical="20dp"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="20dp">
+        android:background="@color/purple_theme_color">
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:onClick="goBack"
-            android:rotation="-90"
             android:src="@drawable/ic_arrow_upward"
+            android:rotation="-90"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="goBack"/>
 
         <TextView
             android:id="@+id/textProfile"
@@ -46,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="35dp"
-            android:background="@drawable/top_curve_profile_background" />
+            android:background="@drawable/top_curve_profile_background"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -158,25 +159,11 @@
                             android:id="@+id/imageView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:contentDescription="@string/gender"
                             android:src="@drawable/ic_gender"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.516" />
-
-                        <Spinner
-                            android:id="@+id/gender"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.032"
-                            app:layout_constraintStart_toEndOf="@+id/imageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.486" />
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="15dp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -257,19 +244,20 @@
                             android:id="@+id/activeLevel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:prompt="Activity Level"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.028"
+                            app:layout_constraintHorizontal_bias="0.036"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.457" />
+                            app:layout_constraintVertical_bias="0.485" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <Button
                         android:id="@+id/saveBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:enabled="true"
