@@ -8,32 +8,53 @@
               tools:context=".view.MealSuggestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/purple_theme_color"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="20dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_theme_color"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
 
         <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:onClick="goBack"
-                android:rotation="-90"
-                android:src="@drawable/ic_arrow_upward"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:onClick="goBack"
+            android:rotation="-90"
+            android:src="@drawable/ic_arrow_upward"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.514" />
 
         <TextView
-                android:id="@+id/textProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:text="@string/meal_suggest"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/textProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/meal_suggest"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/menu_cart2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:elevation="2dp"
+            android:onClick="showBottomDialog"
+            android:src="@drawable/cart"
+            android:transitionName="userIconTransition"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.844"
+            app:layout_constraintStart_toEndOf="@+id/textProfile"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,6 +169,55 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/tdee" />
 
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="@dimen/profile_card_elevation"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/activityLevel"
+                            android:src="@drawable/actlevel_custom" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/activityLevel"
+                                android:textColor="@color/purple_theme_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_activityLevel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activityLevel"
+                                android:textColor="@color/text_light_color"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                     </LinearLayout>

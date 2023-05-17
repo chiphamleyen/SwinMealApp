@@ -1,7 +1,9 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
 import akathon.cos30017.swin_meal_backend.datamodel.SuggestMeal
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
 import au.edu.swin.sdmd.swinmealapp.adapters.MealSuggestAdapter
 import au.edu.swin.sdmd.swinmealapp.adapters.RecyclerFoodItemAdapter
+import au.edu.swin.sdmd.swinmealapp.datamodels.CartItem
 import au.edu.swin.sdmd.swinmealapp.datamodels.MenuItem
+import au.edu.swin.sdmd.swinmealapp.services.CartRepository
 import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,20 +37,26 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 
     private lateinit var bmiTextView: TextView
     private lateinit var tdeeTextView: TextView
+    private lateinit var actLevelTextView: TextView
     private lateinit var recMealCalTextView: TextView
+
+    private lateinit var cartRepository: CartRepository
 
 //    private var foodList = listOf<MenuItem>()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_suggest)
 
         bmiTextView = findViewById(R.id.profile_bmi)
         tdeeTextView = findViewById(R.id.profile_tdee)
+        actLevelTextView = findViewById(R.id.profile_activityLevel)
         recMealCalTextView = findViewById(R.id.rec_meal_cal)
 
         val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         bmiTextView.text = sharedPrefs.getString("bmi", "") ?: ""
+        actLevelTextView.text = sharedPrefs.getString("activeLevel", "") ?: ""
         tdeeTextView.text = sharedPrefs.getString("tdee", "") ?: ""
 
         val rec_meal_cal = round(tdeeTextView.text.toString().toDouble()/3)
@@ -60,6 +70,7 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
         }
         loadSuggestMenu(rec_meal_cal_low.toFloat(), rec_meal_cal_high.toFloat())
 
+        cartRepository = CartRepository(this)
     }
 
     private fun loadSuggestMenu(rec_meal_cal_low: Float, rec_meal_cal_high: Float) {
@@ -88,14 +99,107 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
         itemRecyclerView.layoutManager = linearLayoutManager
     }
 
+    //show food nutrions
+    override fun onFoodClick(item: MenuItem) {
+        val bottomDialog = NutritionsFragment()
+        val bundle = Bundle()
+
+        bundle.putString("food_name", item.itemName)
+        bundle.putString("food_calories", item.calories.toString())
+        bundle.putString("food_protein", item.protein.toString())
+        bundle.putString("food_carbohydrate", item.carbohydrate.toString())
+        bundle.putString("food_fat", item.fat.toString())
+
+        bottomDialog.arguments
+    }
+
     fun goBack(view: View) {onBackPressed()}
 
+    //show bottom fragment
+    fun showBottomDialog(view: View) {
+        val bottomDialog = BottomSheetSelectedItemDialog()
+        val bundle = Bundle()
+
+        var totalPrice = 0.0f
+        var totalItems = 0
+
+        for (item in cartRepository.readCartData()) {
+            totalPrice += item.itemPrice * item.quantity
+            totalItems += item.quantity
+        }
+
+        bundle.putFloat("totalPrice", totalPrice)
+        bundle.putInt("totalItems", totalItems)
+        // bundle.putParcelableArrayList("orderedList", recyclerFoodAdapter.getOrderedList() as ArrayList<out Parcelable?>?)
+
+        bottomDialog.arguments = bundle
+        bottomDialog.show(supportFragmentManager, "BottomSheetDialog")
+    }
+
+    //user icon handler
+    fun showUserProfile(view: View) {
+        startActivity(
+            Intent(
+                this,
+                UserProfileActivity::class.java
+            )
+        )
+    }
+
     override fun onPlusBtnClick(item: MenuItem) {
-        TODO("Not yet implemented")
+        item.quantity += 1
+        val cartItem = CartItem(
+            itemID = item.itemID.toString(),
+            itemName = item.itemName,
+            imageUrl = item.imageUrl,
+            itemPrice = item.itemPrice,
+            quantity = item.quantity,
+            itemStars = item.itemStars,
+            itemShortDesc = item.itemShortDesc,
+        )
+
+        cartRepository.increaseCartItemQuantity(
+            cartItem.itemID,
+            cartItem.itemName,
+            cartItem.itemPrice,
+            cartItem.itemShortDesc,
+            cartItem.imageUrl,
+            cartItem.itemStars,
+            cartItem.quantity,
+//                item.itemID
+        )
+
+        Log.i("quantity: ", item.quantity.toString())
+        Log.i("cart: ", cartItem.toString())
     }
 
     override fun onMinusBtnClick(item: MenuItem) {
-        TODO("Not yet implemented")
+        GlobalScope.launch {
+            if (item.quantity > 0) {
+                item.quantity -= 1
+                val cartItem = CartItem(
+                    itemID = item.itemID.toString(),
+                    itemName = item.itemName,
+                    imageUrl = item.imageUrl,
+                    itemPrice = item.itemPrice,
+                    quantity = item.quantity,
+                    itemStars = item.itemStars,
+                    itemShortDesc = item.itemShortDesc,
+//                    foodID = item.itemID
+                )
+
+                if (item.quantity == 0) {
+                    // If quantity becomes 0, remove the item from cart
+                    cartRepository.removeFromCart(cartItem)
+
+                } else {
+                    // Update the cart item quantity
+                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity)
+                }
+                Log.i("quantity: ", item.quantity.toString())
+                Log.i("cart: ", cartItem.toString())
+            }
+        }
     }
 
 

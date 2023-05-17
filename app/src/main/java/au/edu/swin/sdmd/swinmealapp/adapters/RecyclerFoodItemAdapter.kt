@@ -23,6 +23,7 @@ class RecyclerFoodItemAdapter(
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {
+        fun onFoodClick(item: MenuItem)
         fun onPlusBtnClick(item: MenuItem)
         fun onMinusBtnClick(item: MenuItem)
     }
@@ -44,6 +45,11 @@ class RecyclerFoodItemAdapter(
         holder.itemCalories.text = menu.calories.toString() + " kcal"
         holder.itemQuantity.text = menu.quantity.toString()
         Picasso.get().load(menu.imageUrl).into(holder.itemImage)
+
+        holder.itemView.setOnClickListener{
+            listener.onFoodClick(menu)
+
+        }
 
         holder.itemPlus.setOnClickListener {
             val number = menu.quantity

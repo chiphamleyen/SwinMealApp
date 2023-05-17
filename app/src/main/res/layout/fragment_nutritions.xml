@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/purple_theme_color"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Nutrition Values"
+            android:textColor="#00004f"
+            android:textSize="30sp"
+            android:transitionName="totalOrderedItemsPriceTransition" />
+
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Food name"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <TextView
+            android:id="@+id/nutrition_calories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Calories: "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <TextView
+            android:id="@+id/nutrition_protein"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Protein: "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <TextView
+            android:id="@+id/nutrition_carbohydrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Carbohydrate: "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <TextView
+            android:id="@+id/nutrition_fat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Fat: "
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+    </LinearLayout>
+
+</LinearLayout>

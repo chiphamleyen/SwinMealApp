@@ -483,13 +483,13 @@
                                 <ImageView
                                     android:layout_width="@dimen/category_item_image_width"
                                     android:layout_height="@dimen/category_item_image_height"
-                                    android:src="@drawable/pork" />
+                                    android:src="@drawable/chicken" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:text="@string/porks"
+                                    android:text="@string/friedChicken"
                                     android:textSize="12sp"
                                     android:fontFamily="@font/montserrat_semi_bold"/>
                             </LinearLayout>

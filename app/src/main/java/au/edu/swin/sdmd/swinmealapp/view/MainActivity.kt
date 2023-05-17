@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     private lateinit var slideshowCV: CardView
     private var searchIsActive = false
 
+    private lateinit var checkProfile : String
+
     var foodList = listOf<MenuItem>()
     val imageList = ArrayList<SlideModel>()
 
@@ -66,14 +68,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize the food repository
-//        foodRepository = FoodRepository(this)
         // Initialize the cart repository
         cartRepository = CartRepository(this)
-        // Clear cart table
-//        cartRepository.clearCartTable()
-        // Clear food table
-//        foodRepository.clearDatabase()
 
         loadNavigationDrawer()
         loadMenu()
@@ -81,6 +77,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         val userEmail = sharedPrefs.getString("email", "") ?: ""
         customerServices.getUserProfile(userEmail) {
             customer -> customer?.let {
+            checkProfile = it.age.toString()
+
             val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
             val editor1 = sharedPrefs.edit()
             editor1.putString("emailOrder", it.email)
@@ -202,6 +200,20 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         showAllSwitch.isChecked = false
     }
 
+    //show food nutrions
+    override fun onFoodClick(item: MenuItem) {
+        val bottomDialog = NutritionsFragment()
+        val bundle = Bundle()
+
+        bundle.putString("food_name", item.itemName)
+        bundle.putString("food_calories", item.calories.toString())
+        bundle.putString("food_protein", item.protein.toString())
+        bundle.putString("food_carbohydrate", item.carbohydrate.toString())
+        bundle.putString("food_fat", item.fat.toString())
+
+        bottomDialog.arguments
+    }
+
     //show bottom fragment
     fun showBottomDialog(view: View) {
         val bottomDialog = BottomSheetSelectedItemDialog()
@@ -281,7 +293,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_meal_suggest -> {
-                    if (sharedPrefs.getString("bmi", "") == null || sharedPrefs.getString("tdee", "") == null) {
+                    if (checkProfile == 0.toString()) {
                         Toast.makeText(this, "Please update user profile to use this feature", Toast.LENGTH_SHORT).show()
                     } else {
                         drawerLayout.closeDrawer(GravityCompat.START)
