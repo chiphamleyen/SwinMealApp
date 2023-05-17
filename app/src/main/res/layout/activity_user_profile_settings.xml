@@ -155,15 +155,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="61dp">
 
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/gender"
-                            android:src="@drawable/ic_gender"
-                            tools:layout_editor_absoluteX="16dp"
-                            tools:layout_editor_absoluteY="15dp" />
+<!--                        <ImageView-->
+<!--                            android:id="@+id/imageView"-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:contentDescription="@string/gender"-->
+<!--                            android:src="@drawable/ic_gender"-->
+<!--                            tools:layout_editor_absoluteX="16dp"-->
+<!--                            tools:layout_editor_absoluteY="15dp" />-->
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_gender"
+                            android:drawablePadding="10dp"
+                            android:hint="@string/age"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            tools:ignore="MissingConstraints" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -244,7 +254,6 @@
                             android:id="@+id/activeLevel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:prompt="Activity Level"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.036"
