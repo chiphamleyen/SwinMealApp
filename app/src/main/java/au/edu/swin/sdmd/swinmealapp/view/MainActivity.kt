@@ -59,11 +59,21 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     private lateinit var slideshowCV: CardView
     private var searchIsActive = false
 
-    private var checkProfile: Int? = null
+    private var checkProfile: String? = null
 
     var foodList = listOf<MenuItem>()
     val imageList = ArrayList<SlideModel>()
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("email", "") ?: ""
+        customerServices.getUserProfile(userEmail) {
+            customer -> customer?.let {
+                checkProfile = it.gender
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -290,15 +300,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_meal_suggest -> {
-                    val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                    val userEmail = sharedPrefs.getString("email", "") ?: ""
-                    customerServices.getUserProfile(userEmail) {
-                        customer -> customer?.let {
-                            checkProfile = it.age
-                        }
-                    }
                     Log.i("checkProfile", checkProfile.toString())
-                    if (checkProfile == null) {
+                    if (checkProfile == null || checkProfile == "null") {
                         Toast.makeText(this, "Please update user profile to use this feature", Toast.LENGTH_SHORT).show()
                     } else {
                         drawerLayout.closeDrawer(GravityCompat.START)
