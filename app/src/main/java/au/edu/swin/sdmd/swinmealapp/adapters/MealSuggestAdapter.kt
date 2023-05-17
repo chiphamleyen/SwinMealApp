@@ -8,9 +8,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
+import au.edu.swin.sdmd.swinmealapp.datamodels.MenuItem
 import com.squareup.picasso.Picasso
 
-class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): RecyclerView.Adapter<MealSuggestAdapter.ItemListViewHolder>() {
+class MealSuggestAdapter(
+    private val suggestMeals: MutableList<SuggestMeal>,
+    private val listener: OnItemClickListener)
+    : RecyclerView.Adapter<MealSuggestAdapter.ItemListViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onFoodClick1(item: SuggestMeal)
+        fun onFoodClick2(item: SuggestMeal)
+        fun onPlusBtn1Click(item: SuggestMeal)
+        fun onPlusBtn2Click(item: SuggestMeal)
+        fun onMinusBtn1Click(item: SuggestMeal)
+        fun onMinusBtn2Click(item: SuggestMeal)
+    }
 
     class ItemListViewHolder( view: View) : RecyclerView.ViewHolder(view) {
         val itemFood1Image: ImageView = view.findViewById(R.id.food1_item_image)
@@ -61,6 +74,82 @@ class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): Re
         Picasso.get().load(suggestMeal.food2.imageUrl).into(holder.itemFood2Image)
         val textHolder = "Option ${position + 1} - Calories: ${suggestMeal.food1.calories + suggestMeal.food2.calories} "
         holder.totalSuggestedCalories.text = textHolder
+
+        holder.itemFood1Plus.setOnClickListener {
+            val number = suggestMeal.food1.quantity
+            holder.itemFood1Quantity.text = (number + 1).toString()
+            listener.onPlusBtn1Click(suggestMeal)
+        }
+
+        holder.itemFood1Minus.setOnClickListener {
+            val number = suggestMeal.food1.quantity
+            if (number > 0) {
+                holder.itemFood1Quantity.text = (number - 1).toString()
+                listener.onMinusBtn2Click(suggestMeal)
+            }
+        }
+
+        holder.itemFood2Plus.setOnClickListener {
+            val number = suggestMeal.food1.quantity
+            holder.itemFood1Quantity.text = (number + 1).toString()
+            listener.onPlusBtn1Click(suggestMeal)
+        }
+
+        holder.itemFood2Minus.setOnClickListener {
+            val number = suggestMeal.food1.quantity
+            if (number > 0) {
+                holder.itemFood1Quantity.text = (number - 1).toString()
+                listener.onMinusBtn2Click(suggestMeal)
+            }
+        }
+
+        holder.itemFood1Image.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2Image.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
+
+        holder.itemFood1Name.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2Name.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
+
+        holder.itemFood1Price.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2Price.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
+
+        holder.itemFood1Stars.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2Stars.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
+
+        holder.itemFood1ShortDesc.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2ShortDesc.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
+
+        holder.itemFood1CaloriesTv.setOnClickListener {
+            listener.onFoodClick1(suggestMeal)
+        }
+
+        holder.itemFood2CaloriesTv.setOnClickListener {
+            listener.onFoodClick2(suggestMeal)
+        }
     }
 
     override fun getItemCount(): Int = suggestMeals.size

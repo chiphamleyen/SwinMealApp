@@ -100,7 +100,8 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/activityLevel"
-                                android:src="@drawable/ic_gender" />
+                                android:src="@drawable/bmi"
+                                app:tint="#6173DF"/>
 
                         <LinearLayout
                                 android:layout_width="wrap_content"
@@ -148,7 +149,8 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/activityLevel"
-                                android:src="@drawable/ic_gender" />
+                                android:src="@drawable/tdee"
+                                app:tint="#6173DF"/>
 
                         <LinearLayout
                                 android:layout_width="wrap_content"
@@ -245,7 +247,8 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/activityLevel"
-                                android:src="@drawable/ic_gender" />
+                                android:src="@drawable/meal"
+                                app:tint="#6173DF"/>
 
                         <LinearLayout
                                 android:layout_width="wrap_content"

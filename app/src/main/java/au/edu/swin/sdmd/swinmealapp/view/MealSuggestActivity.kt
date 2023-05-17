@@ -29,7 +29,7 @@ import kotlinx.coroutines.withContext
 import kotlin.math.round
 import kotlin.properties.Delegates
 
-class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
+class MealSuggestActivity : AppCompatActivity(), MealSuggestAdapter.OnItemClickListener {
     private val menuItemServices = MenuItemServices()
     private lateinit var adapter: MealSuggestAdapter
     private lateinit var itemRecyclerView: RecyclerView
@@ -87,7 +87,7 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 //            itemRecyclerView.adapter = adapter
             var suggestMeals = withContext(Dispatchers.IO) { menuItemServices.getMenuSuggest(rec_meal_cal_low, rec_meal_cal_high).shuffled() }
             suggestMeals = if(suggestMeals.size > 5) suggestMeals.subList(0,5) else suggestMeals
-            adapter = MealSuggestAdapter(suggestMeals as MutableList<SuggestMeal>)
+            adapter = MealSuggestAdapter(suggestMeals as MutableList<SuggestMeal>, this@MealSuggestActivity)
             itemRecyclerView.adapter = adapter
 //            println(suggestMeals.size)
 //            println(adapter.itemCount)
@@ -97,20 +97,6 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 
         linearLayoutManager = LinearLayoutManager(this)
         itemRecyclerView.layoutManager = linearLayoutManager
-    }
-
-    //show food nutrions
-    override fun onFoodClick(item: MenuItem) {
-        val bottomDialog = NutritionsFragment()
-        val bundle = Bundle()
-
-        bundle.putString("food_name", item.itemName)
-        bundle.putString("food_calories", item.calories.toString())
-        bundle.putString("food_protein", item.protein.toString())
-        bundle.putString("food_carbohydrate", item.carbohydrate.toString())
-        bundle.putString("food_fat", item.fat.toString())
-
-        bottomDialog.arguments
     }
 
     fun goBack(view: View) {onBackPressed()}
@@ -146,16 +132,42 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
         )
     }
 
-    override fun onPlusBtnClick(item: MenuItem) {
-        item.quantity += 1
+    override fun onFoodClick1(item: SuggestMeal) {
+        val bottomDialog = NutritionsFragment()
+        val bundle = Bundle()
+
+        bundle.putString("food_name", item.food1.itemName)
+        bundle.putString("food_calories", item.food1.calories.toString())
+        bundle.putString("food_protein", item.food1.protein.toString())
+        bundle.putString("food_carbohydrate", item.food1.carbohydrate.toString())
+        bundle.putString("food_fat", item.food1.fat.toString())
+
+        bottomDialog.arguments
+    }
+
+    override fun onFoodClick2(item: SuggestMeal) {
+        val bottomDialog = NutritionsFragment()
+        val bundle = Bundle()
+
+        bundle.putString("food_name", item.food2.itemName)
+        bundle.putString("food_calories", item.food2.calories.toString())
+        bundle.putString("food_protein", item.food2.protein.toString())
+        bundle.putString("food_carbohydrate", item.food2.carbohydrate.toString())
+        bundle.putString("food_fat", item.food2.fat.toString())
+
+        bottomDialog.arguments
+    }
+
+    override fun onPlusBtn1Click(item: SuggestMeal) {
+        item.food1.quantity += 1
         val cartItem = CartItem(
-            itemID = item.itemID.toString(),
-            itemName = item.itemName,
-            imageUrl = item.imageUrl,
-            itemPrice = item.itemPrice,
-            quantity = item.quantity,
-            itemStars = item.itemStars,
-            itemShortDesc = item.itemShortDesc,
+            itemID = item.food1.itemID.toString(),
+            itemName = item.food1.itemName,
+            imageUrl = item.food1.imageUrl,
+            itemPrice = item.food1.itemPrice,
+            quantity = item.food1.quantity,
+            itemStars = item.food1.itemStars,
+            itemShortDesc = item.food1.itemShortDesc,
         )
 
         cartRepository.increaseCartItemQuantity(
@@ -169,26 +181,52 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 //                item.itemID
         )
 
-        Log.i("quantity: ", item.quantity.toString())
-        Log.i("cart: ", cartItem.toString())
+        Log.i("quantity food1: ", item.food1.quantity.toString())
+        Log.i("cart food1: ", cartItem.toString())
     }
 
-    override fun onMinusBtnClick(item: MenuItem) {
+    override fun onPlusBtn2Click(item: SuggestMeal) {
+        item.food2.quantity += 1
+        val cartItem = CartItem(
+            itemID = item.food2.itemID.toString(),
+            itemName = item.food2.itemName,
+            imageUrl = item.food2.imageUrl,
+            itemPrice = item.food2.itemPrice,
+            quantity = item.food2.quantity,
+            itemStars = item.food2.itemStars,
+            itemShortDesc = item.food2.itemShortDesc,
+        )
+
+        cartRepository.increaseCartItemQuantity(
+            cartItem.itemID,
+            cartItem.itemName,
+            cartItem.itemPrice,
+            cartItem.itemShortDesc,
+            cartItem.imageUrl,
+            cartItem.itemStars,
+            cartItem.quantity,
+//                item.itemID
+        )
+
+        Log.i("quantity food2: ", item.food2.quantity.toString())
+        Log.i("cart food2: ", cartItem.toString())
+    }
+
+    override fun onMinusBtn1Click(item: SuggestMeal) {
         GlobalScope.launch {
-            if (item.quantity > 0) {
-                item.quantity -= 1
+            if (item.food1.quantity > 0) {
+                item.food1.quantity -= 1
                 val cartItem = CartItem(
-                    itemID = item.itemID.toString(),
-                    itemName = item.itemName,
-                    imageUrl = item.imageUrl,
-                    itemPrice = item.itemPrice,
-                    quantity = item.quantity,
-                    itemStars = item.itemStars,
-                    itemShortDesc = item.itemShortDesc,
-//                    foodID = item.itemID
+                    itemID = item.food1.itemID.toString(),
+                    itemName = item.food1.itemName,
+                    imageUrl = item.food1.imageUrl,
+                    itemPrice = item.food1.itemPrice,
+                    quantity = item.food1.quantity,
+                    itemStars = item.food1.itemStars,
+                    itemShortDesc = item.food1.itemShortDesc,
                 )
 
-                if (item.quantity == 0) {
+                if (item.food1.quantity == 0) {
                     // If quantity becomes 0, remove the item from cart
                     cartRepository.removeFromCart(cartItem)
 
@@ -196,11 +234,37 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
                     // Update the cart item quantity
                     cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity)
                 }
-                Log.i("quantity: ", item.quantity.toString())
-                Log.i("cart: ", cartItem.toString())
+                Log.i("quantity food1: ", item.food1.quantity.toString())
+                Log.i("cart food1: ", cartItem.toString())
             }
         }
     }
 
+    override fun onMinusBtn2Click(item: SuggestMeal) {
+        GlobalScope.launch {
+            if (item.food2.quantity > 0) {
+                item.food2.quantity -= 1
+                val cartItem = CartItem(
+                    itemID = item.food2.itemID.toString(),
+                    itemName = item.food2.itemName,
+                    imageUrl = item.food2.imageUrl,
+                    itemPrice = item.food2.itemPrice,
+                    quantity = item.food2.quantity,
+                    itemStars = item.food2.itemStars,
+                    itemShortDesc = item.food2.itemShortDesc,
+                )
 
+                if (item.food2.quantity == 0) {
+                    // If quantity becomes 0, remove the item from cart
+                    cartRepository.removeFromCart(cartItem)
+
+                } else {
+                    // Update the cart item quantity
+                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity)
+                }
+                Log.i("quantity food2: ", item.food2.quantity.toString())
+                Log.i("cart food2: ", cartItem.toString())
+            }
+        }
+    }
 }

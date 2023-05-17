@@ -48,7 +48,6 @@ class RecyclerFoodItemAdapter(
 
         holder.itemView.setOnClickListener{
             listener.onFoodClick(menu)
-
         }
 
         holder.itemPlus.setOnClickListener {
