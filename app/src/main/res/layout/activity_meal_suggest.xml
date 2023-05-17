@@ -109,18 +109,19 @@
                                 android:orientation="vertical">
 
                             <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="@string/bmi"
-                                    android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/bmi"
+                                android:textColor="@color/purple_theme_color"
+                                android:textSize="16sp" />
 
                             <TextView
-                                    android:id="@+id/profile_bmi"
-                                    android:layout_width="96dp"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/bmi" />
+                                android:id="@+id/profile_bmi"
+                                android:layout_width="96dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bmi"
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
@@ -158,18 +159,19 @@
                                 android:orientation="vertical">
 
                             <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="@string/tdee"
-                                    android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/tdee"
+                                android:textColor="@color/purple_theme_color"
+                                android:textSize="16sp" />
 
                             <TextView
-                                    android:id="@+id/profile_tdee"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/tdee" />
+                                android:id="@+id/profile_tdee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tdee"
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
@@ -211,7 +213,7 @@
                                 android:fontFamily="@font/montserrat_bold"
                                 android:text="@string/activityLevel"
                                 android:textColor="@color/purple_theme_color"
-                                android:textSize="12sp" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/profile_activityLevel"
@@ -219,7 +221,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/activityLevel"
                                 android:textColor="@color/text_light_color"
-                                android:textSize="15sp" />
+                                android:textSize="16sp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -256,18 +258,19 @@
                                 android:orientation="vertical">
 
                             <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="Recommended calories per meal"
-                                    android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp" />
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="Recommended calories per meal"
+                                android:textColor="@color/purple_theme_color"
+                                android:textSize="16sp" />
 
                             <TextView
-                                    android:id="@+id/rec_meal_cal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/meal_suggest" />
+                                android:id="@+id/rec_meal_cal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/meal_suggest"
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 

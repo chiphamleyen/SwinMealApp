@@ -8,13 +8,13 @@
               android:layout_marginBottom="16dp">
 
     <TextView
-            android:id="@+id/total_suggested_calories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Total Calories"
-            android:layout_marginStart="16dp"
-            android:textSize="16sp"/>
+        android:id="@+id/total_suggested_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Total Calories"
+        android:textSize="20sp" />
 
     <!--    First Food-->
     <androidx.cardview.widget.CardView

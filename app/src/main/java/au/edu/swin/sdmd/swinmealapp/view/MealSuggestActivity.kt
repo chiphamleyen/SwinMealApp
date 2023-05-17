@@ -57,9 +57,10 @@ class MealSuggestActivity : AppCompatActivity(), MealSuggestAdapter.OnItemClickL
         val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         bmiTextView.text = sharedPrefs.getString("bmi", "") ?: ""
         actLevelTextView.text = sharedPrefs.getString("activeLevel", "") ?: ""
-        tdeeTextView.text = sharedPrefs.getString("tdee", "") ?: ""
+        val tdee = sharedPrefs.getString("tdee", "") ?: ""
+        tdeeTextView.text = "~${tdee} calories per day"
 
-        val rec_meal_cal = round(tdeeTextView.text.toString().toDouble()/3)
+        val rec_meal_cal = round(tdee.toDouble()/3)
         val rec_meal_cal_low = round(rec_meal_cal*95/100)
         val rec_meal_cal_high = round(rec_meal_cal*105/100)
         recMealCalTextView.text = "${rec_meal_cal_low} to ${rec_meal_cal_high}"

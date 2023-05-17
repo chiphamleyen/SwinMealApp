@@ -57,12 +57,8 @@ class UserProfileActivity : AppCompatActivity() {
 //            if (user != null) {  // Check if user email is not null
         // Populate user profile data to TextViews
         update.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    UserProfileSettings::class.java
-                )
-            )
+            startActivity( Intent(this, UserProfileSettings::class.java) )
+            finish()
         }
 
         customerServices.getUserProfile(userEmail) { customer ->
@@ -105,15 +101,6 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     fun goBack(view: View) {onBackPressed()}
-
-//    fun updateProfile(view: View) {
-//        startActivity(
-//            Intent(
-//                this,
-//                UserProfileSettings::class.java
-//            )
-//        )
-//    }
 
     fun bmiRate (bmi : Float) : String {
         if (bmi < 18.5 ) return  " Underweight"

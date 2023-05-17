@@ -106,4 +106,6 @@ class UserProfileSettings : AppCompatActivity() {
         startActivity(Intent(this, UserProfileActivity::class.java))
         finish()
     }
+
+    fun goBack(view: View) {onBackPressed()}
 }

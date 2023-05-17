@@ -154,10 +154,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="@string/food_categories"
-                        android:textSize="12sp"
                         android:textColor="@color/purple_theme_color"
-                        android:fontFamily="@font/montserrat_semi_bold"/>
+                        android:textSize="16sp" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -558,22 +558,23 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="@string/here_s_what_i_found_for_you"
+                    android:layout_weight="1"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:textSize="12sp"/>
+                    android:text="@string/here_s_what_i_found_for_you"
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/show_all_items_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/show_all"
+                    android:checked="true"
                     android:fontFamily="@font/montserrat_regular"
+                    android:minHeight="0dp"
                     android:scaleX="0.8"
                     android:scaleY="0.8"
-                    android:minHeight="0dp"
-                    android:checked="true" />
+                    android:text="@string/show_all"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
