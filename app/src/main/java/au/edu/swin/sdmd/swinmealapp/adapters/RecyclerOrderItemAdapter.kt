@@ -44,6 +44,7 @@ class RecyclerOrderItemAdapter(var context: Context,
         val itemPriceTV: TextView = itemView.findViewById(R.id.item_price)
         val itemStarsTV: TextView = itemView.findViewById(R.id.item_stars)
         val itemShortDesc: TextView = itemView.findViewById(R.id.item_shortDesc)
+        val itemCalories: TextView = itemView.findViewById(R.id.item_calories)
         val itemQuantityTV: TextView = itemView.findViewById(R.id.item_quantity)
         val itemQuantityIncreaseIV: ImageView = itemView.findViewById(R.id.item_plus)
         val itemQuantityDecreaseIV: ImageView = itemView.findViewById(R.id.item_minus)
@@ -69,7 +70,7 @@ class RecyclerOrderItemAdapter(var context: Context,
         holder.itemPriceTV.text = "$${currentItem.itemPrice}"
         holder.itemStarsTV.text = currentItem.itemStars.toString()
         holder.itemShortDesc.text = currentItem.itemShortDesc
-
+        holder.itemCalories.text = ""
         holder.itemQuantityTV.text = currentItem.quantity.toString()
 
         holder.removeOrderedItem.setOnClickListener {
