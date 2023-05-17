@@ -63,13 +63,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.MealSuggestActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".view.OrderDoneActivity"
             android:exported="false">
             <meta-data

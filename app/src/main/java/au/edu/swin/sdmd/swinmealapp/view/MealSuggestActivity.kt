@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.swin.sdmd.swinmealapp.R
 import au.edu.swin.sdmd.swinmealapp.adapters.RecyclerFoodItemAdapter
+import au.edu.swin.sdmd.swinmealapp.datamodels.CartItem
 import au.edu.swin.sdmd.swinmealapp.datamodels.MenuItem
+import au.edu.swin.sdmd.swinmealapp.services.CartRepository
 import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -27,6 +29,8 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
     private lateinit var adapter: RecyclerFoodItemAdapter
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
+
+    private lateinit var cartRepository: CartRepository
 
     private lateinit var bmiTextView: TextView
     private lateinit var tdeeTextView: TextView
@@ -54,6 +58,11 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
         recMealCalTextView.text = "${rec_meal_cal_low} to ${rec_meal_cal_high}"
 
         loadSuggestMenu(rec_meal_cal_low, rec_meal_cal_high)
+
+        // Initialize the cart repository
+        cartRepository = CartRepository(this)
+        // Clear cart table
+//        cartRepository.clearCartTable()
     }
 
     private fun loadSuggestMenu(rec_meal_cal_low: Double, rec_meal_cal_high: Double) {
@@ -78,12 +87,83 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 
     fun goBack(view: View) {onBackPressed()}
 
-    override fun onPlusBtnClick(item: MenuItem) {
-        TODO("Not yet implemented")
+    //show bottom fragment
+    fun showBottomDialog(view: View) {
+        val bottomDialog = BottomSheetSelectedItemDialog()
+        val bundle = Bundle()
+
+        var totalPrice = 0.0f
+        var totalItems = 0
+
+        for (item in cartRepository.readCartData()) {
+            totalPrice += item.itemPrice * item.quantity
+            totalItems += item.quantity
+        }
+
+        bundle.putFloat("totalPrice", totalPrice)
+        bundle.putInt("totalItems", totalItems)
+        // bundle.putParcelableArrayList("orderedList", recyclerFoodAdapter.getOrderedList() as ArrayList<out Parcelable?>?)
+
+        bottomDialog.arguments = bundle
+        bottomDialog.show(supportFragmentManager, "BottomSheetDialog")
     }
 
+    //plus button handler
+    override fun onPlusBtnClick(item: MenuItem) {
+        item.quantity += 1
+        val cartItem = CartItem(
+            itemID = item.itemID.toString(),
+            itemName = item.itemName,
+            imageUrl = item.imageUrl,
+            itemPrice = item.itemPrice,
+            quantity = item.quantity,
+            itemStars = item.itemStars,
+            itemShortDesc = item.itemShortDesc,
+        )
+
+        cartRepository.increaseCartItemQuantity(
+            cartItem.itemID,
+            cartItem.itemName,
+            cartItem.itemPrice,
+            cartItem.itemShortDesc,
+            cartItem.imageUrl,
+            cartItem.itemStars,
+            cartItem.quantity,
+//                item.itemID
+        )
+
+        Log.i("quantity: ", item.quantity.toString())
+        Log.i("cart: ", cartItem.toString())
+    }
+
+    //minus button handler
     override fun onMinusBtnClick(item: MenuItem) {
-        TODO("Not yet implemented")
+        GlobalScope.launch {
+            if (item.quantity > 0) {
+                item.quantity -= 1
+                val cartItem = CartItem(
+                    itemID = item.itemID.toString(),
+                    itemName = item.itemName,
+                    imageUrl = item.imageUrl,
+                    itemPrice = item.itemPrice,
+                    quantity = item.quantity,
+                    itemStars = item.itemStars,
+                    itemShortDesc = item.itemShortDesc,
+//                    foodID = item.itemID
+                )
+
+                if (item.quantity == 0) {
+                    // If quantity becomes 0, remove the item from cart
+                    cartRepository.removeFromCart(cartItem)
+
+                } else {
+                    // Update the cart item quantity
+                    cartRepository.decreaseCartItemQuantity(cartItem.itemID, cartItem.itemName, cartItem.itemPrice, cartItem.itemShortDesc, cartItem.imageUrl, cartItem.itemStars, cartItem.quantity)
+                }
+                Log.i("quantity: ", item.quantity.toString())
+                Log.i("cart: ", cartItem.toString())
+            }
+        }
     }
 
 

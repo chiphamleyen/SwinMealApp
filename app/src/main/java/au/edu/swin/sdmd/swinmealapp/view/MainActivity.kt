@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         // Initialize the cart repository
         cartRepository = CartRepository(this)
         // Clear cart table
-        cartRepository.clearCartTable()
+//        cartRepository.clearCartTable()
         // Clear food table
 //        foodRepository.clearDatabase()
 

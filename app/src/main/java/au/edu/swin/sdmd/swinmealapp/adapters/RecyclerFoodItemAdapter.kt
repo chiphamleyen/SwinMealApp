@@ -41,6 +41,7 @@ class RecyclerFoodItemAdapter(
         holder.itemPrice.text = "$${menu.itemPrice}"
         holder.itemStars.text = menu.itemStars.toString()
         holder.itemShortDesc.text = menu.itemShortDesc
+        holder.itemCalories.text = menu.calories.toString() + " kcal"
         holder.itemQuantity.text = menu.quantity.toString()
         Picasso.get().load(menu.imageUrl).into(holder.itemImage)
 
@@ -68,6 +69,7 @@ class RecyclerFoodItemAdapter(
         val itemPrice: TextView = view.findViewById(R.id.item_price)
         val itemStars: TextView = view.findViewById(R.id.item_stars)
         val itemShortDesc: TextView = view.findViewById(R.id.item_shortDesc)
+        val itemCalories: TextView = view.findViewById(R.id.item_calories)
         val itemQuantity: TextView = view.findViewById(R.id.item_quantity)
         val itemPlus: ImageView = view.findViewById(R.id.item_plus)
         val itemMinus: ImageView = view.findViewById(R.id.item_minus)
