@@ -14,7 +14,9 @@ import com.google.android.material.textfield.TextInputEditText
 
 class UserProfileSettings : AppCompatActivity() {
     //    private lateinit var fullNameTIL: TextInputEditText
-    private lateinit var genderTIL: TextInputEditText
+    private lateinit var genderList: Spinner
+    private var selectedGender: String? = null
+    private val genders = arrayOf("Male", "Female")
     private lateinit var ageTIL: TextInputEditText
     private lateinit var heightTIL: TextInputEditText
     private lateinit var weightTIL: TextInputEditText
@@ -29,7 +31,25 @@ class UserProfileSettings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile_settings)
 
-        genderTIL = findViewById(R.id.gender)
+        genderList = findViewById(R.id.gender)
+        genderList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedGender = parent?.getItemAtPosition(position) as? String
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                selectedGender = null
+            }
+        }
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genders)
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Apply the adapter to the spinner
+        genderList.adapter = adapter
+
         ageTIL = findViewById(R.id.age)
         heightTIL = findViewById(R.id.height)
         weightTIL = findViewById(R.id.weight)
@@ -65,9 +85,9 @@ class UserProfileSettings : AppCompatActivity() {
 //        val userEmail = "chipham@gmail.com"
 
         saveBtn.setOnClickListener {
-            val gender = genderTIL.text.toString()
+            val gender = selectedGender.toString().lowercase()
             val age = ageTIL.text.toString()
-            val height = ageTIL.text.toString()
+            val height = heightTIL.text.toString()
             val weight = weightTIL.text.toString()
             val actLevel = selectedActiveLevel.toString().lowercase()
             if (gender.isEmpty() || age.isEmpty() || height.isEmpty() || weight.isEmpty() || actLevel.isEmpty()) {

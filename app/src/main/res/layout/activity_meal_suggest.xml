@@ -79,7 +79,8 @@
                             android:layout_height="30dp"
                             android:layout_marginEnd="10dp"
                             android:contentDescription="@string/activityLevel"
-                            android:src="@drawable/ic_gender" />
+                            android:src="@drawable/bmi"
+                            app:tint="#6173DF" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -127,7 +128,8 @@
                             android:layout_height="30dp"
                             android:layout_marginEnd="10dp"
                             android:contentDescription="@string/activityLevel"
-                            android:src="@drawable/ic_gender" />
+                            android:src="@drawable/tdee"
+                            app:tint="#6173DF" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -156,6 +158,55 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="@dimen/profile_card_elevation"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/activityLevel"
+                            android:src="@drawable/actlevel_custom" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/activityLevel"
+                                android:textColor="@color/purple_theme_color"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_activityLevel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/activityLevel"
+                                android:textColor="@color/text_light_color"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/profile_card_margin_vertical"
                     app:cardCornerRadius="5dp"
@@ -175,7 +226,8 @@
                             android:layout_height="30dp"
                             android:layout_marginEnd="10dp"
                             android:contentDescription="@string/activityLevel"
-                            android:src="@drawable/ic_gender" />
+                            android:src="@drawable/meal"
+                            app:tint="#6173DF" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

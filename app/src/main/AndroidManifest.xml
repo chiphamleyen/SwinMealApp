@@ -14,6 +14,13 @@
         android:theme="@style/Theme.CustomP"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.MealSuggestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.UserProfileSettings"
             android:exported="false">
             <meta-data

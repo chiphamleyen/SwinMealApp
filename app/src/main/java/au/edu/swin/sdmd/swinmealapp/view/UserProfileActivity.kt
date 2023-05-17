@@ -75,14 +75,14 @@ class UserProfileActivity : AppCompatActivity() {
                 heightTextView.text = it.height.toString() + " cm"
                 weightTextView.text = it.weight.toString() + " kg"
                 actLevelTextView.text = it.activityLevel
-
-
-                bmiTextView.text = "%.1f".format(it.weight.toString().toFloat()/(it.height.toString().toFloat()*it.height.toString().toFloat())*10000)
+                val bmi = calculateBMI(it.weight, it.height)
+                bmiTextView.text = "%.1f".format(bmi) + bmiRate(bmi)
                 val tdee = calculateTDEE(it.weight, it.height, it.age, it.gender, it.activityLevel).toString()
                 tdeeTextView.text = "~${tdee} calories per day"
                 val editor = sharedPrefs.edit()
                 editor.putString("bmi", bmiTextView.text.toString())
                 editor.putString("tdee", tdee)
+                editor.putString("activeLevel", it.activityLevel)
                 editor.apply()
             } ?: run {
                 // Handle the case when customer is null (error occurred)
@@ -109,6 +109,17 @@ class UserProfileActivity : AppCompatActivity() {
 //            )
 //        )
 //    }
+
+    fun bmiRate (bmi : Float) : String {
+        if (bmi < 18.5 ) return  " Underweight"
+        else if (bmi in 18.5..25.0) return " Healthy"
+        else if (bmi in 25.0..30.0) return " Overweight"
+        else return  " Obesity"
+    }
+
+    fun calculateBMI(weight: Float?, height: Float?) : Float  {
+        return weight.toString().toFloat()/(height.toString().toFloat()*height.toString().toFloat())*10000
+    }
 
     fun calculateTDEE(weight: Float?, height: Float?, age: Int?, gender: String?, activityLevel: String?): Double {
 

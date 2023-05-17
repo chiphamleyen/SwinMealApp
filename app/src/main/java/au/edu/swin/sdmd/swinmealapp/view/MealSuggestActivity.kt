@@ -30,6 +30,7 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 
     private lateinit var bmiTextView: TextView
     private lateinit var tdeeTextView: TextView
+    private lateinit var actLevelTextView: TextView
     private lateinit var recMealCalTextView: TextView
 
     private var foodList = listOf<MenuItem>()
@@ -40,11 +41,13 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 
         bmiTextView = findViewById(R.id.profile_bmi)
         tdeeTextView = findViewById(R.id.profile_tdee)
+        actLevelTextView = findViewById(R.id.profile_activityLevel)
         recMealCalTextView = findViewById(R.id.rec_meal_cal)
 
         val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         bmiTextView.text = sharedPrefs.getString("bmi", "") ?: ""
         tdeeTextView.text = sharedPrefs.getString("tdee", "") ?: ""
+        actLevelTextView.text = sharedPrefs.getString("activeLevel", "") ?: ""
         val rec_meal_cal = round(tdeeTextView.text.toString().toDouble()/3)
         val rec_meal_cal_low = round(rec_meal_cal*95/100)
         val rec_meal_cal_high = round(rec_meal_cal*105/100)

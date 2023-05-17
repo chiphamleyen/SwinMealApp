@@ -1,5 +1,6 @@
 package au.edu.swin.sdmd.swinmealapp.view
 
+import android.content.Context
 import au.edu.swin.sdmd.swinmealapp.adapters.RecyclerFoodItemAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -261,21 +262,26 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         toggle.syncState()
 
         val drawerDelay: Long = 150 //delay of the drawer to close
+        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_food_menu -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_meal_suggest -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({
-                        startActivity(
-                            Intent(
-                                this,
-                                MealSuggestActivity::class.java
+                    if (sharedPrefs.getString("bmi", "") == null || sharedPrefs.getString("tdee", "") == null) {
+                        Toast.makeText(this, "Please update user profile to use this feature", Toast.LENGTH_SHORT).show()
+                    } else {
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                        Handler().postDelayed({
+                            startActivity(
+                                Intent(
+                                    this,
+                                    MealSuggestActivity::class.java
+                                )
                             )
-                        )
-                    }, drawerDelay)
+                        }, drawerDelay)
+                    }
                 }
                 R.id.nav_profile -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
