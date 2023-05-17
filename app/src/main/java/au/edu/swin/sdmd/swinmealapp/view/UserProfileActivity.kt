@@ -26,7 +26,7 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var bmiTextView: TextView
     private lateinit var tdeeTextView: TextView
 
-    private val menuItemServices = CustomerServices()
+    private val customerServices = CustomerServices()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +65,7 @@ class UserProfileActivity : AppCompatActivity() {
             )
         }
 
-        menuItemServices.getUserProfile(userEmail) { customer ->
+        customerServices.getUserProfile(userEmail) { customer ->
             customer?.let {
                 // Populate user profile data to TextViews
                 fullNameTextView.text = it.name
@@ -84,6 +84,11 @@ class UserProfileActivity : AppCompatActivity() {
                 editor.putString("tdee", tdee)
                 editor.putString("activeLevel", it.activityLevel)
                 editor.apply()
+                val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+                val editor1 = sharedPrefs.edit()
+                editor1.putString("emailOrder", it.email)
+                editor1.putString("nameOrder", it.name)
+                editor1.apply()
             } ?: run {
                 // Handle the case when customer is null (error occurred)
                 Toast.makeText(this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()

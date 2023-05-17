@@ -21,6 +21,7 @@ class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): Re
         val itemFood1Quantity: TextView = view.findViewById(R.id.food1_item_quantity)
         val itemFood1Plus: ImageView = view.findViewById(R.id.food1_item_plus)
         val itemFood1Minus: ImageView = view.findViewById(R.id.food1_item_minus)
+        val itemFood1CaloriesTv = view.findViewById<TextView>(R.id.food1_item_calories)
 
         val itemFood2Image: ImageView = view.findViewById(R.id.food2_item_image)
         val itemFood2Name: TextView = view.findViewById(R.id.food2_item_name)
@@ -31,6 +32,7 @@ class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): Re
         val itemFood2Plus: ImageView = view.findViewById(R.id.food2_item_plus)
         val itemFood2Minus: ImageView = view.findViewById(R.id.food2_item_minus)
         val totalSuggestedCalories = view.findViewById<TextView>(R.id.total_suggested_calories)
+        val itemFood2CaloriesTv = view.findViewById<TextView>(R.id.food2_item_calories)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
@@ -47,6 +49,7 @@ class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): Re
         holder.itemFood1Stars.text = suggestMeal.food1.itemStars.toString()
         holder.itemFood1ShortDesc.text = suggestMeal.food1.itemShortDesc
         holder.itemFood1Quantity.text = suggestMeal.food1.quantity.toString()
+        holder.itemFood1CaloriesTv.text = "${suggestMeal.food1.calories.toString()} kcal"
         Picasso.get().load(suggestMeal.food1.imageUrl).into(holder.itemFood1Image)
 
         holder.itemFood2Name.text = suggestMeal.food2.itemName
@@ -54,6 +57,7 @@ class MealSuggestAdapter(private val suggestMeals: MutableList<SuggestMeal>): Re
         holder.itemFood2Stars.text = suggestMeal.food2.itemStars.toString()
         holder.itemFood2ShortDesc.text = suggestMeal.food2.itemShortDesc
         holder.itemFood2Quantity.text = suggestMeal.food2.quantity.toString()
+        holder.itemFood2CaloriesTv.text = "${suggestMeal.food2.calories.toString()} kcal"
         Picasso.get().load(suggestMeal.food2.imageUrl).into(holder.itemFood2Image)
         val textHolder = "Option ${position + 1} - Calories: ${suggestMeal.food1.calories + suggestMeal.food2.calories} "
         holder.totalSuggestedCalories.text = textHolder

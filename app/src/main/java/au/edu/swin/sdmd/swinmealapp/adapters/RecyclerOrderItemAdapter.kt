@@ -47,6 +47,7 @@ class RecyclerOrderItemAdapter(var context: Context,
         val itemQuantityTV: TextView = itemView.findViewById(R.id.item_quantity)
         val itemQuantityIncreaseIV: ImageView = itemView.findViewById(R.id.item_plus)
         val itemQuantityDecreaseIV: ImageView = itemView.findViewById(R.id.item_minus)
+        val itemCalories: TextView = itemView.findViewById(R.id.item_calories)
     }
 
     // View holder class for holding view references
@@ -106,6 +107,8 @@ class RecyclerOrderItemAdapter(var context: Context,
                 updateOrderDetails()
             }
         }
+
+        holder.itemCalories.text = ""
     }
 
     private fun removeItem(position: Int) {

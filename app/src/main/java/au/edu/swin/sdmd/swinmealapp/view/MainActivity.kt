@@ -28,6 +28,7 @@ import au.edu.swin.sdmd.swinmealapp.datamodels.CartItem
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import au.edu.swin.sdmd.swinmealapp.services.CartRepository
+import au.edu.swin.sdmd.swinmealapp.services.CustomerServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import au.edu.swin.sdmd.swinmealapp.services.MenuItemServices
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
 //    private lateinit var foodRepository: FoodRepository
     private val menuItemServices = MenuItemServices()
+    private val customerServices = CustomerServices()
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var adapter: RecyclerFoodItemAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -75,7 +77,17 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
         loadNavigationDrawer()
         loadMenu()
-
+        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("email", "") ?: ""
+        customerServices.getUserProfile(userEmail) {
+            customer -> customer?.let {
+            val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+            val editor1 = sharedPrefs.edit()
+            editor1.putString("emailOrder", it.email)
+            editor1.putString("nameOrder", it.name)
+            editor1.apply()
+        }
+        }
         imageList.add(SlideModel("https://c0.wallpaperflare.com/preview/5/307/817/pizza-courier-online-cheese.jpg"))
         imageList.add(SlideModel("https://tasteforlife.com/sites/default/files/styles/facebook/public/healthy-recipes/soups/pho-bo-spicy-beef-vietnamese-noodle-soup/pho-bo-spicy-beef-vietnamese-noodle-soup.jpg?itok=3f4AcJoW", "Special Meal"))
         imageList.add(SlideModel("https://www.irishexaminer.com/cms_media/module_img/4648/2324177_111_seoimage2x1_young-woman-preparing-takeaway-healthy-food-inside-restaurant-during-picture-id1223841327.jpg"))

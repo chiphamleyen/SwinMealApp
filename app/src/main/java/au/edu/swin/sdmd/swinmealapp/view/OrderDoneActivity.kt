@@ -31,6 +31,7 @@ class OrderDoneActivity : AppCompatActivity() {
     private lateinit var orderIDTV: TextView
     private lateinit var dateAndTimeTV: TextView
 
+    private lateinit var cartRepository: CartRepository
     private var totalItemPrice = 0.0F
     private var totalTaxPrice = 0.0F
     private var subTotalPrice = 0.0F
@@ -75,6 +76,10 @@ class OrderDoneActivity : AppCompatActivity() {
 
 
         saveOrderData()
+
+        cartRepository = CartRepository(this)
+        // Clear cart table
+        cartRepository.clearCartTable()
 
         findViewById<ImageView>(R.id.order_done_show_qr_iv).setOnClickListener { showQRCode() }
         findViewById<ImageView>(R.id.order_done_share_iv).setOnClickListener { shareOrder() }

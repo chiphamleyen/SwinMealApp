@@ -55,6 +55,7 @@ class LoginUserActivity : AppCompatActivity() {
                         editor.putString("email", email)
                         editor.apply()
 
+
                         finish()
                     }
                 } else {

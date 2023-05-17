@@ -29,9 +29,10 @@ class MenuItemServices {
         return jacksonObjectMapper().readValue(responseBody ?: "", object : TypeReference<List<MenuItem>>() {})
     }
 
-    fun getMenuSuggest(): List<SuggestMeal> {
+    fun getMenuSuggest(lowerCaloPerMeal: Float, upperCaloPerMeal: Float): List<SuggestMeal> {
+        val mealSuggestRequestUrl = "http://10.0.2.2:8080/suggest-meals"
         val request = Request.Builder()
-            .url("http://10.0.2.2:8080/suggest-meals")
+            .url("$mealSuggestRequestUrl?lower_calo=$lowerCaloPerMeal&upper_calo=$upperCaloPerMeal")
             .build()
 
         val response = httpClient.newCall(request).execute()

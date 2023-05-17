@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.children
@@ -53,11 +54,15 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
         val rec_meal_cal_high = round(rec_meal_cal*105/100)
         recMealCalTextView.text = "${rec_meal_cal_low} to ${rec_meal_cal_high}"
 
-        loadSuggestMenu(rec_meal_cal_low, rec_meal_cal_high)
+        val regenerateBtn = findViewById<Button>(R.id.regenerate_suggested_meals)
+        regenerateBtn.setOnClickListener() {
+            loadSuggestMenu(rec_meal_cal_low.toFloat(), rec_meal_cal_high.toFloat())
+        }
+        loadSuggestMenu(rec_meal_cal_low.toFloat(), rec_meal_cal_high.toFloat())
 
     }
 
-    private fun loadSuggestMenu(rec_meal_cal_low: Double, rec_meal_cal_high: Double) {
+    private fun loadSuggestMenu(rec_meal_cal_low: Float, rec_meal_cal_high: Float) {
         lifecycleScope.launch {
 //            foodList = withContext(Dispatchers.IO) { menuItemServices.getMenuItems() }
 //            adapter = RecyclerFoodItemAdapter(foodList as MutableList<MenuItem>, this@MealSuggestActivity)
@@ -69,7 +74,7 @@ class MealSuggestActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemC
 //            suggestList.shuffle()
 //            adapter.filterList(suggestList)
 //            itemRecyclerView.adapter = adapter
-            var suggestMeals = withContext(Dispatchers.IO) { menuItemServices.getMenuSuggest().shuffled() }
+            var suggestMeals = withContext(Dispatchers.IO) { menuItemServices.getMenuSuggest(rec_meal_cal_low, rec_meal_cal_high).shuffled() }
             suggestMeals = if(suggestMeals.size > 5) suggestMeals.subList(0,5) else suggestMeals
             adapter = MealSuggestAdapter(suggestMeals as MutableList<SuggestMeal>)
             itemRecyclerView.adapter = adapter
