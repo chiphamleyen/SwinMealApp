@@ -261,6 +261,7 @@
                         app:cardElevation="@dimen/profile_card_elevation"
                         app:cardPreventCornerOverlap="false">
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

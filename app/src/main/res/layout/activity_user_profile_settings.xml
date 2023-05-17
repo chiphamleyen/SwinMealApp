@@ -152,7 +152,9 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_profile_gender"
                         android:layout_width="match_parent"
+                        android:background="@drawable/layout_border"
                         android:layout_height="61dp">
+
 
                         <ImageView
                             android:id="@+id/imageView"
@@ -239,6 +241,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_profile_actLevel"
                         android:layout_width="match_parent"
+                        android:background="@drawable/layout_border"
                         android:layout_height="59dp">
 
                         <ImageView
