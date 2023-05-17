@@ -85,20 +85,20 @@ class MealSuggestAdapter(
             val number = suggestMeal.food1.quantity
             if (number > 0) {
                 holder.itemFood1Quantity.text = (number - 1).toString()
-                listener.onMinusBtn2Click(suggestMeal)
+                listener.onMinusBtn1Click(suggestMeal)
             }
         }
 
         holder.itemFood2Plus.setOnClickListener {
-            val number = suggestMeal.food1.quantity
-            holder.itemFood1Quantity.text = (number + 1).toString()
-            listener.onPlusBtn1Click(suggestMeal)
+            val number = suggestMeal.food2.quantity
+            holder.itemFood2Quantity.text = (number + 1).toString()
+            listener.onPlusBtn2Click(suggestMeal)
         }
 
         holder.itemFood2Minus.setOnClickListener {
-            val number = suggestMeal.food1.quantity
+            val number = suggestMeal.food2.quantity
             if (number > 0) {
-                holder.itemFood1Quantity.text = (number - 1).toString()
+                holder.itemFood2Quantity.text = (number - 1).toString()
                 listener.onMinusBtn2Click(suggestMeal)
             }
         }

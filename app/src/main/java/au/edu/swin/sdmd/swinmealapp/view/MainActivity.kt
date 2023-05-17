@@ -211,7 +211,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         bundle.putString("food_carbohydrate", item.carbohydrate.toString())
         bundle.putString("food_fat", item.fat.toString())
 
-        bottomDialog.arguments
+        bottomDialog.arguments = bundle
+        bottomDialog.show(supportFragmentManager, "NutritionsFragment")
     }
 
     //show bottom fragment
@@ -286,7 +287,6 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         toggle.syncState()
 
         val drawerDelay: Long = 150 //delay of the drawer to close
-        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_food_menu -> {

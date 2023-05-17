@@ -32,7 +32,7 @@ open class NutritionsFragment: BottomSheetDialogFragment() {
         val food_carbohydrate = this.arguments?.getString("food_carbohydrate").toString()
         val food_fat = this.arguments?.getString("food_fat").toString()
 
-        Log.i("Food: ", food_name+food_calories )
+        Log.i("fragment: ", food_name+food_calories )
 
         view.findViewById<TextView>(R.id.food_name).text = food_name
         view.findViewById<TextView>(R.id.nutrition_calories).text = "- Calories: ${food_calories} kcal"

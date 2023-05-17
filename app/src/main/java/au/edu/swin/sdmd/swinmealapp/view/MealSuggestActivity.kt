@@ -136,26 +136,30 @@ class MealSuggestActivity : AppCompatActivity(), MealSuggestAdapter.OnItemClickL
         val bottomDialog = NutritionsFragment()
         val bundle = Bundle()
 
+        Log.i("activity: ", item.food1.itemName+item.food1.calories )
         bundle.putString("food_name", item.food1.itemName)
         bundle.putString("food_calories", item.food1.calories.toString())
         bundle.putString("food_protein", item.food1.protein.toString())
         bundle.putString("food_carbohydrate", item.food1.carbohydrate.toString())
         bundle.putString("food_fat", item.food1.fat.toString())
 
-        bottomDialog.arguments
+        bottomDialog.arguments = bundle
+        bottomDialog.show(supportFragmentManager, "NutritionsFragment")
     }
 
     override fun onFoodClick2(item: SuggestMeal) {
         val bottomDialog = NutritionsFragment()
         val bundle = Bundle()
 
+        Log.i("Food: ", item.food2.itemName+item.food2.calories )
         bundle.putString("food_name", item.food2.itemName)
         bundle.putString("food_calories", item.food2.calories.toString())
         bundle.putString("food_protein", item.food2.protein.toString())
         bundle.putString("food_carbohydrate", item.food2.carbohydrate.toString())
         bundle.putString("food_fat", item.food2.fat.toString())
 
-        bottomDialog.arguments
+        bottomDialog.arguments = bundle
+        bottomDialog.show(supportFragmentManager, "NutritionsFragment")
     }
 
     override fun onPlusBtn1Click(item: SuggestMeal) {
