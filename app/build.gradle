@@ -9,7 +9,7 @@ android {
         resources.excludes.add("META-INF/*")
     }
     defaultConfig {
-        applicationId "au.edu.swin.sdmd.myapp"
+        applicationId "au.edu.swin.sdmd.swinmealapp"
         minSdkVersion 26
         targetSdkVersion 33
         versionCode 1
