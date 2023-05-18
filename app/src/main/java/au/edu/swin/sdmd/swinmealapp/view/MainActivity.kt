@@ -87,11 +87,13 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         val userEmail = sharedPrefs.getString("email", "") ?: ""
         customerServices.getUserProfile(userEmail) {
             customer -> customer?.let {
-                val editor1 = sharedPrefs.edit()
-                editor1.putString("emailOrder", it.email)
-                editor1.putString("nameOrder", it.name)
-                editor1.apply()
+            val sharedPrefs = getSharedPreferences("Order", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+            editor.putString("emailOrder", it.email)
+            editor.putString("nameOrder", it.name)
+            editor.apply()
             }
+
         }
         imageList.add(SlideModel("https://c0.wallpaperflare.com/preview/5/307/817/pizza-courier-online-cheese.jpg"))
         imageList.add(SlideModel("https://tasteforlife.com/sites/default/files/styles/facebook/public/healthy-recipes/soups/pho-bo-spicy-beef-vietnamese-noodle-soup/pho-bo-spicy-beef-vietnamese-noodle-soup.jpg?itok=3f4AcJoW", "Special Meal"))
